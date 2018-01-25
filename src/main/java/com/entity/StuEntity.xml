@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--命名空间namespace-->
+<mapper namespace="com.dao.IStuDao">
+    <!--增加-->
+    <insert id="insert" parameterType="com.entity.StuEntity">
+        INSERT INTO students(name,sex,age) VALUE (#{name},#{sex},#{age})
+    </insert>
+    <!--删除-->
+    <delete id="delete" parameterType="int">
+        DELETE FROM students WHERE id=#{id}
+    </delete>
+    <!--修改-->
+    <update id="update" parameterType="com.entity.StuEntity">
+        UPDATE students SET name=#{name},sex=#{sex},age=#{age} WHERE id=#{id};
+    </update>
+    <!--查询所有-->
+    <select id="queryList" resultType="com.entity.StuEntity" >
+        SELECT * FROM students
+        <choose>
+            <when test="sql!=null and sql!=''">
+                 #{sql} limit #{begin},#{end}
+            </when>
+            <otherwise>
+        limit #{begin},#{end}
+    </otherwise>
+            </choose>
+            </select>
+
+
+    <!--查询所有 分页-->
+    <select id="queryMap" resultType="com.entity.StuEntity" >
+        SELECT * FROM students
+        <choose>
+            <when test="sql!=null and sql!=''">
+                #{sql} limit #{begin},#{end}
+            </when>
+            <otherwise>
+                limit #{begin},#{end}
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--查询单个 查询必须返回查询对应的类（必须要有parameterType）（parameterType可有可无）-->
+    <select id="query" parameterType="int" resultType="com.entity.StuEntity">
+        SELECT * FROM students WHERE id=#{id}
+    </select>
+    <!--查询个数量-->
+    <select id="getCount" parameterType="String" resultType="int">
+        SELECT count(*) FROM students
+        <choose>
+            <when test="sql!=null and sql!=''">
+                WHERE #{sql}
+            </when>
+            <otherwise></otherwise>
+        </choose>
+    </select>
+
+
+
+
+<!--    <select id="queryList" resultType="com.entity.StuEntity" >
+        SELECT * FROM students
+        <choose>
+            <when test="param!=null">
+                WHERE #{param1} limit #{param2},#{param3}这么写那边就不用加注解了
+            </when>
+            <otherwise>
+                limit #{param2},#{param3}
+            </otherwise>
+        </choose>
+    </select>-->
+</mapper>
