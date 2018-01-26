@@ -16,7 +16,6 @@ public class StudentController {
     @Autowired
     StuService stuService;
 
-    //    查询所有学生的方法
     @ResponseBody
     @RequestMapping("queryList")
     public Map<String,Object> queryList(HttpServletRequest request) throws Exception{
