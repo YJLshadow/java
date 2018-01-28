@@ -1,18 +1,18 @@
 package com.entity;
 
-public class Position_Power {
+public class Position_PowerEntity {
 
     private Integer positionId;
     private Integer powerId;
 
-    public Position_Power() {
+    public Position_PowerEntity() {
     }
 
-    public Position_Power(Integer powerId) {
+    public Position_PowerEntity(Integer powerId) {
         this.powerId = powerId;
     }
 
-    public Position_Power(Integer positionId, Integer powerId) {
+    public Position_PowerEntity(Integer positionId, Integer powerId) {
         this.positionId = positionId;
         this.powerId = powerId;
     }
@@ -35,7 +35,7 @@ public class Position_Power {
 
     @Override
     public String toString() {
-        return "Position_Power{" +
+        return "Position_PowerEntity{" +
                 "positionId=" + positionId +
                 ", powerId=" + powerId +
                 '}';

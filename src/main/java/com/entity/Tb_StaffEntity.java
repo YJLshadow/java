@@ -1,6 +1,6 @@
 package com.entity;
 
-public class Tb_Staff {
+public class Tb_StaffEntity {
 
     private Integer staffId;
     private String staffName;
@@ -12,10 +12,10 @@ public class Tb_Staff {
     private String staffRemark;
     private String headerImage;
 
-    public Tb_Staff() {
+    public Tb_StaffEntity() {
     }
 
-    public Tb_Staff(String staffName, Integer gender, String staffCard, String staffAddress, Integer education, String loginPassword, String staffRemark, String headerImage) {
+    public Tb_StaffEntity(String staffName, Integer gender, String staffCard, String staffAddress, Integer education, String loginPassword, String staffRemark, String headerImage) {
         this.staffName = staffName;
         this.gender = gender;
         this.staffCard = staffCard;
@@ -26,7 +26,7 @@ public class Tb_Staff {
         this.headerImage = headerImage;
     }
 
-    public Tb_Staff(Integer staffId, String staffName, Integer gender, String staffCard, String staffAddress, Integer education, String loginPassword, String staffRemark, String headerImage) {
+    public Tb_StaffEntity(Integer staffId, String staffName, Integer gender, String staffCard, String staffAddress, Integer education, String loginPassword, String staffRemark, String headerImage) {
         this.staffId = staffId;
         this.staffName = staffName;
         this.gender = gender;
@@ -112,7 +112,7 @@ public class Tb_Staff {
 
     @Override
     public String toString() {
-        return "Tb_Staff{" +
+        return "Tb_StaffEntity{" +
                 "staffId=" + staffId +
                 ", staffName='" + staffName + '\'' +
                 ", gender=" + gender +

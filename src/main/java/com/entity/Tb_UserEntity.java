@@ -2,7 +2,7 @@ package com.entity;
 
 import java.util.Date;
 
-public class Tb_User {
+public class Tb_UserEntity {
 
     private Integer userId;
     private String tel;
@@ -17,10 +17,10 @@ public class Tb_User {
     private Double assets;
     private Integer staffId;
 
-    public Tb_User() {
+    public Tb_UserEntity() {
     }
 
-    public Tb_User(String tel, String password, String name, Integer gender, Date birth, String userCard, String address, String head, String email, Double assets, Integer staffId) {
+    public Tb_UserEntity(String tel, String password, String name, Integer gender, Date birth, String userCard, String address, String head, String email, Double assets, Integer staffId) {
         this.tel = tel;
         this.password = password;
         this.name = name;
@@ -34,7 +34,7 @@ public class Tb_User {
         this.staffId = staffId;
     }
 
-    public Tb_User(Integer userId, String tel, String password, String name, Integer gender, Date birth, String userCard, String address, String head, String email, Double assets, Integer staffId) {
+    public Tb_UserEntity(Integer userId, String tel, String password, String name, Integer gender, Date birth, String userCard, String address, String head, String email, Double assets, Integer staffId) {
         this.userId = userId;
         this.tel = tel;
         this.password = password;
@@ -147,7 +147,7 @@ public class Tb_User {
 
     @Override
     public String toString() {
-        return "Tb_User{" +
+        return "Tb_UserEntity{" +
                 "userId=" + userId +
                 ", tel='" + tel + '\'' +
                 ", password='" + password + '\'' +

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.UserDao">
+    <select id="queryListForUser" resultType="com.entity.Tb_UserEntity">
+        select * from tb_user
+    </select>
+    <select id="QueryUserById" parameterType="int" resultType="com.entity.Tb_UserEntity">
+        select * from user WHERE userId=#{userId}
+    </select>
+    <insert id="addUser" parameterType="com.entity.Tb_UserEntity">
+ /*       INSERT INTO USER(pname,page) VALUES(#{name},#{page});*/
+    </insert>
+</mapper>

@@ -2,23 +2,23 @@ package com.entity;
 
 import java.util.Date;
 
-public class Tb_Company {
+public class Tb_CompanyEntity {
 
     private Integer companyId;
     private String companyName;
     private Date companyDate;
     private String companyRemark;
 
-    public Tb_Company() {
+    public Tb_CompanyEntity() {
     }
 
-    public Tb_Company(String companyName, Date companyDate, String companyRemark) {
+    public Tb_CompanyEntity(String companyName, Date companyDate, String companyRemark) {
         this.companyName = companyName;
         this.companyDate = companyDate;
         this.companyRemark = companyRemark;
     }
 
-    public Tb_Company(Integer companyId, String companyName, Date companyDate, String companyRemark) {
+    public Tb_CompanyEntity(Integer companyId, String companyName, Date companyDate, String companyRemark) {
         this.companyId = companyId;
         this.companyName = companyName;
         this.companyDate = companyDate;
@@ -59,7 +59,7 @@ public class Tb_Company {
 
     @Override
     public String toString() {
-        return "Tb_Company{" +
+        return "Tb_CompanyEntity{" +
                 "companyId=" + companyId +
                 ", companyName='" + companyName + '\'' +
                 ", companyDate=" + companyDate +

@@ -2,23 +2,23 @@ package com.entity;
 
 import java.util.Date;
 
-public class Tb_Collect {
+public class Tb_CollectEntity {
 
     private Integer collectId;
     private Integer userId;
     private String productCode;
     private Date orderData;
 
-    public Tb_Collect() {
+    public Tb_CollectEntity() {
     }
 
-    public Tb_Collect(Integer userId, String productCode, Date orderData) {
+    public Tb_CollectEntity(Integer userId, String productCode, Date orderData) {
         this.userId = userId;
         this.productCode = productCode;
         this.orderData = orderData;
     }
 
-    public Tb_Collect(Integer collectId, Integer userId, String productCode, Date orderData) {
+    public Tb_CollectEntity(Integer collectId, Integer userId, String productCode, Date orderData) {
         this.collectId = collectId;
         this.userId = userId;
         this.productCode = productCode;
@@ -59,7 +59,7 @@ public class Tb_Collect {
 
     @Override
     public String toString() {
-        return "Tb_Collect{" +
+        return "Tb_CollectEntity{" +
                 "collectId=" + collectId +
                 ", userId=" + userId +
                 ", productCode='" + productCode + '\'' +

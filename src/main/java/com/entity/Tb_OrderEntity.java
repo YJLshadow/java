@@ -2,7 +2,7 @@ package com.entity;
 
 import java.util.Date;
 
-public class Tb_Order {
+public class Tb_OrderEntity {
 
     private Integer orderID;
     private Integer userId;
@@ -14,10 +14,10 @@ public class Tb_Order {
     private Integer staffId;
     private Integer orderType;
 
-    public Tb_Order() {
+    public Tb_OrderEntity() {
     }
 
-    public Tb_Order(Integer userId, String productCode, Double order, Date orderData, Integer orderState, Integer orderFrom, Integer staffId, Integer orderType) {
+    public Tb_OrderEntity(Integer userId, String productCode, Double order, Date orderData, Integer orderState, Integer orderFrom, Integer staffId, Integer orderType) {
         this.userId = userId;
         this.productCode = productCode;
         this.order = order;
@@ -28,7 +28,7 @@ public class Tb_Order {
         this.orderType = orderType;
     }
 
-    public Tb_Order(Integer orderID, Integer userId, String productCode, Double order, Date orderData, Integer orderState, Integer orderFrom, Integer staffId, Integer orderType) {
+    public Tb_OrderEntity(Integer orderID, Integer userId, String productCode, Double order, Date orderData, Integer orderState, Integer orderFrom, Integer staffId, Integer orderType) {
         this.orderID = orderID;
         this.userId = userId;
         this.productCode = productCode;
@@ -114,7 +114,7 @@ public class Tb_Order {
 
     @Override
     public String toString() {
-        return "Tb_Order{" +
+        return "Tb_OrderEntity{" +
                 "orderID=" + orderID +
                 ", userId=" + userId +
                 ", productCode='" + productCode + '\'' +

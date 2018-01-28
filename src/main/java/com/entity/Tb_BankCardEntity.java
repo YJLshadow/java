@@ -1,6 +1,6 @@
 package com.entity;
 
-public class Tb_BankCard {
+public class Tb_BankCardEntity {
 
     private Integer cardId;
     private Integer bankCardId;
@@ -8,17 +8,17 @@ public class Tb_BankCard {
     private Integer bankId;
     private String bankCard;
 
-    public Tb_BankCard() {
+    public Tb_BankCardEntity() {
     }
 
-    public Tb_BankCard(Integer bankCardId, Integer userId, Integer bankId, String bankCard) {
+    public Tb_BankCardEntity(Integer bankCardId, Integer userId, Integer bankId, String bankCard) {
         this.bankCardId = bankCardId;
         this.userId = userId;
         this.bankId = bankId;
         this.bankCard = bankCard;
     }
 
-    public Tb_BankCard(Integer cardId, Integer bankCardId, Integer userId, Integer bankId, String bankCard) {
+    public Tb_BankCardEntity(Integer cardId, Integer bankCardId, Integer userId, Integer bankId, String bankCard) {
         this.cardId = cardId;
         this.bankCardId = bankCardId;
         this.userId = userId;
@@ -68,7 +68,7 @@ public class Tb_BankCard {
 
     @Override
     public String toString() {
-        return "Tb_BankCard{" +
+        return "Tb_BankCardEntity{" +
                 "cardId=" + cardId +
                 ", bankCardId=" + bankCardId +
                 ", userId=" + userId +
