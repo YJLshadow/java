@@ -2,7 +2,7 @@ package com.controller;
 
 import com.entity.Tb_UserEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.service.UserService;
+import com.service.impl.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,7 @@ import java.util.Map;
 @Controller
 public class UserController {
     @Autowired
-    UserService userService;
+    BankService.UserService userService;
 
     @ResponseBody
     @RequestMapping("queryList")
