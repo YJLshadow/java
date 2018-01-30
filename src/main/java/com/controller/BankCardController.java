@@ -35,7 +35,7 @@ public class BankCardController {
     @RequestMapping(value = "addTb_BankCard")
     public String addTb_BankCard(HttpServletRequest request){
 
-        return null;
+        return "";
     }
 
     @ResponseBody
