@@ -1,21 +1,18 @@
 package com.controller;
 
-import com.entity.Tb_BankEntity;
-import com.service.IBankService;
+import com.entity.Tb_BankCardEntity;
+import com.service.IBankCardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-@Controller
-public class BankController {
+public class BankCardController {
 
     @Autowired
-    IBankService iBankService;
-
+    IBankCardService iBankCardService;
 
     @ResponseBody
     @RequestMapping(value = "selectWhere")
@@ -28,33 +25,34 @@ public class BankController {
 
     @ResponseBody
     @RequestMapping(value = "getById")
-    public Tb_BankEntity getById(HttpServletRequest request){
+    public Tb_BankCardEntity getById(HttpServletRequest request){
 
 
         return null;
     }
 
     @ResponseBody
-    @RequestMapping(value = "addTb_Bank")
-    public String addTb_Bank(HttpServletRequest request){
+    @RequestMapping(value = "addTb_BankCard")
+    public String addTb_BankCard(HttpServletRequest request){
 
         return null;
     }
 
     @ResponseBody
-    @RequestMapping(value = "deleteTb_Bank")
-    public String deleteTb_Bank(HttpServletRequest request){
+    @RequestMapping(value = "deleteTb_BankCard")
+    public String deleteTb_BankCard(HttpServletRequest request){
 
 
         return null;
     }
 
     @ResponseBody
-    @RequestMapping(value = "updateTb_Bank")
-    public String updateTb_Bank(HttpServletRequest request){
+    @RequestMapping(value = "updateTb_BankCard")
+    public String updateTb_BankCard(HttpServletRequest request){
 
 
         return null;
     }
+
 
 }

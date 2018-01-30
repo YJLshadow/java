@@ -1,72 +1,44 @@
 package com.service.impl;
 
-import com.dao.IUserDao;
-import com.entity.Tb_UserEntity;
-import com.service.IUserService;
+import com.dao.IBankDao;
+import com.entity.Tb_BankEntity;
+import com.service.IBankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class BankService {
-    @Service
-    public static class UserService implements IUserService {
-        @Autowired
-        IUserDao iStuDao;
-        public boolean insert(Object object) {
-            boolean f=false;
-                iStuDao.insert(object);
-                f=true;
-            return f;
-        }
+@Service
+public class BankService implements IBankService{
 
-        public boolean delete(Object object, Object a) {
-            boolean f=false;
-                iStuDao.delete(object,a);
-                f=true;
-            return f;
+    @Autowired
+    IBankDao iBankDao;
 
-        }
+    public void addTb_Bank(Tb_BankEntity bankEntity) {
 
-        public boolean delete(Object object) {
-            boolean f=false;
-                iStuDao.delete(object);
-                f=true;
-            return f;
-        }
+    }
 
-        public boolean update(Object object) {
-            boolean f=false;
-                iStuDao.update(object);
-                f=true;
-            return f;
-        }
+    public List<Tb_BankEntity> getall() {
+        return null;
+    }
 
-        public List<Tb_UserEntity> queryList(String sql, int begin, int end) {
-            return iStuDao.queryList(sql,begin,end);
-        }
+    public List<Tb_BankEntity> selectWhere(String start, String end, String bankName) {
+        return null;
+    }
 
-        public Map<String, Object> queryMap(String sql, int begin, int end) {
-            Map<String,Object> map = new HashMap<String, Object>();
-            int count = getCount(sql);
-            int maxPage = (count/end) + ((count%end) != 0 ? 1:0);
-            List<Tb_UserEntity> list = iStuDao.queryList(sql,begin,end);
-            map.put("list",list);
-            map.put("maxPage",maxPage);
-            return map;
-        }
+    public Tb_BankEntity getbyid(String bankId) {
+        return null;
+    }
 
-        public Tb_UserEntity query(Serializable serializable) {
-            return iStuDao.query(serializable);
-        }
+    public void updateTb_Bank(Tb_BankEntity bankEntity) {
 
-        public int getCount(String sql) {
-            return iStuDao.getCount(sql);
-        }
+    }
 
+    public void deleteTb_Bank(String bankdId) {
 
+    }
+
+    public int getMax(String bankName) {
+        return 0;
     }
 }

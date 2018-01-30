@@ -1,7 +1,7 @@
 package com.controller;
 
-import com.entity.Tb_BankEntity;
-import com.service.IBankService;
+import com.entity.Tb_CompanyEntity;
+import com.service.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
-public class BankController {
+public class CompanyController {
 
     @Autowired
-    IBankService iBankService;
-
+    ICompanyService iCompanyService;
 
     @ResponseBody
     @RequestMapping(value = "selectWhere")
@@ -28,33 +27,35 @@ public class BankController {
 
     @ResponseBody
     @RequestMapping(value = "getById")
-    public Tb_BankEntity getById(HttpServletRequest request){
+    public Tb_CompanyEntity getById(HttpServletRequest request){
 
 
         return null;
     }
 
     @ResponseBody
-    @RequestMapping(value = "addTb_Bank")
-    public String addTb_Bank(HttpServletRequest request){
+    @RequestMapping(value = "addTb_Company")
+    public String addTb_Company(HttpServletRequest request){
 
         return null;
     }
 
     @ResponseBody
-    @RequestMapping(value = "deleteTb_Bank")
-    public String deleteTb_Bank(HttpServletRequest request){
+    @RequestMapping(value = "deleteTb_Company")
+    public String deleteTb_Company(HttpServletRequest request){
 
 
         return null;
     }
 
     @ResponseBody
-    @RequestMapping(value = "updateTb_Bank")
-    public String updateTb_Bank(HttpServletRequest request){
+    @RequestMapping(value = "updateTb_Company")
+    public String updateTb_Company(HttpServletRequest request){
 
 
         return null;
     }
+
+
 
 }
