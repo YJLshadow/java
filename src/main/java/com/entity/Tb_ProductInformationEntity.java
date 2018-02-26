@@ -1,22 +1,22 @@
 package com.entity;
 
-public class Tb_ProductInformation {
+public class Tb_ProductInformationEntity {
 
     private Integer informationId;
     private String informationName;
     private String productCode;
     private String remarks;
 
-    public Tb_ProductInformation() {
+    public Tb_ProductInformationEntity() {
     }
 
-    public Tb_ProductInformation(String informationName, String productCode, String remarks) {
+    public Tb_ProductInformationEntity(String informationName, String productCode, String remarks) {
         this.informationName = informationName;
         this.productCode = productCode;
         this.remarks = remarks;
     }
 
-    public Tb_ProductInformation(Integer informationId, String informationName, String productCode, String remarks) {
+    public Tb_ProductInformationEntity(Integer informationId, String informationName, String productCode, String remarks) {
         this.informationId = informationId;
         this.informationName = informationName;
         this.productCode = productCode;
@@ -57,7 +57,7 @@ public class Tb_ProductInformation {
 
     @Override
     public String toString() {
-        return "Tb_ProductInformation{" +
+        return "Tb_ProductInformationEntity{" +
                 "informationId=" + informationId +
                 ", informationName='" + informationName + '\'' +
                 ", productCode='" + productCode + '\'' +

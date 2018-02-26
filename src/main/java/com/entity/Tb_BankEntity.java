@@ -2,23 +2,23 @@ package com.entity;
 
 import java.util.Date;
 
-public class Tb_Bank {
+public class Tb_BankEntity {
 
     private Integer bankId;
     private String bankName;
     private String bankRemark;
     private Date bankDate;
 
-    public Tb_Bank() {
+    public Tb_BankEntity() {
     }
 
-    public Tb_Bank(String bankName, String bankRemark, Date bankDate) {
+    public Tb_BankEntity(String bankName, String bankRemark, Date bankDate) {
         this.bankName = bankName;
         this.bankRemark = bankRemark;
         this.bankDate = bankDate;
     }
 
-    public Tb_Bank(Integer bankId, String bankName, String bankRemark, Date bankDate) {
+    public Tb_BankEntity(Integer bankId, String bankName, String bankRemark, Date bankDate) {
         this.bankId = bankId;
         this.bankName = bankName;
         this.bankRemark = bankRemark;
@@ -59,7 +59,7 @@ public class Tb_Bank {
 
     @Override
     public String toString() {
-        return "Tb_Bank{" +
+        return "Tb_BankEntity{" +
                 "bankId=" + bankId +
                 ", bankName='" + bankName + '\'' +
                 ", bankRemark='" + bankRemark + '\'' +

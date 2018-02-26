@@ -2,7 +2,7 @@ package com.entity;
 
 import java.util.Date;
 
-public class Tb_UserMessage {
+public class Tb_UserMessageEntity {
 
     private Integer messageId;
     private Integer userId;
@@ -11,10 +11,10 @@ public class Tb_UserMessage {
     private Date messageData;
     private Integer messageType;
 
-    public Tb_UserMessage() {
+    public Tb_UserMessageEntity() {
     }
 
-    public Tb_UserMessage(Integer userId, String messageTitle, String messageBody, Date messageData, Integer messageType) {
+    public Tb_UserMessageEntity(Integer userId, String messageTitle, String messageBody, Date messageData, Integer messageType) {
         this.userId = userId;
         this.messageTitle = messageTitle;
         this.messageBody = messageBody;
@@ -22,7 +22,7 @@ public class Tb_UserMessage {
         this.messageType = messageType;
     }
 
-    public Tb_UserMessage(Integer messageId, Integer userId, String messageTitle, String messageBody, Date messageData, Integer messageType) {
+    public Tb_UserMessageEntity(Integer messageId, Integer userId, String messageTitle, String messageBody, Date messageData, Integer messageType) {
         this.messageId = messageId;
         this.userId = userId;
         this.messageTitle = messageTitle;
@@ -81,7 +81,7 @@ public class Tb_UserMessage {
 
     @Override
     public String toString() {
-        return "Tb_UserMessage{" +
+        return "Tb_UserMessageEntity{" +
                 "messageId=" + messageId +
                 ", userId=" + userId +
                 ", messageTitle='" + messageTitle + '\'' +

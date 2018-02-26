@@ -1,6 +1,6 @@
 package com.entity;
 
-public class Tb_Power {
+public class Tb_PowerEntity {
 
     private Integer powerId;
     private String powerName;
@@ -10,10 +10,10 @@ public class Tb_Power {
     private String closeIcon;
     private Integer powerType;
 
-    public Tb_Power() {
+    public Tb_PowerEntity() {
     }
 
-    public Tb_Power(String powerName, Integer pId, String action, String icon, String closeIcon, Integer powerType) {
+    public Tb_PowerEntity(String powerName, Integer pId, String action, String icon, String closeIcon, Integer powerType) {
         this.powerName = powerName;
         this.pId = pId;
         this.action = action;
@@ -22,7 +22,7 @@ public class Tb_Power {
         this.powerType = powerType;
     }
 
-    public Tb_Power(Integer powerId, String powerName, Integer pId, String action, String icon, String closeIcon, Integer powerType) {
+    public Tb_PowerEntity(Integer powerId, String powerName, Integer pId, String action, String icon, String closeIcon, Integer powerType) {
         this.powerId = powerId;
         this.powerName = powerName;
         this.pId = pId;
@@ -90,7 +90,7 @@ public class Tb_Power {
 
     @Override
     public String toString() {
-        return "Tb_Power{" +
+        return "Tb_PowerEntity{" +
                 "powerId=" + powerId +
                 ", powerName='" + powerName + '\'' +
                 ", pId=" + pId +

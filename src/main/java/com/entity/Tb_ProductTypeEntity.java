@@ -1,18 +1,18 @@
 package com.entity;
 
-public class Tb_ProductType {
+public class Tb_ProductTypeEntity {
 
     private Integer typeId;
     private String typeName;
 
-    public Tb_ProductType() {
+    public Tb_ProductTypeEntity() {
     }
 
-    public Tb_ProductType(String typeName) {
+    public Tb_ProductTypeEntity(String typeName) {
         this.typeName = typeName;
     }
 
-    public Tb_ProductType(Integer typeId, String typeName) {
+    public Tb_ProductTypeEntity(Integer typeId, String typeName) {
         this.typeId = typeId;
         this.typeName = typeName;
     }
@@ -35,7 +35,7 @@ public class Tb_ProductType {
 
     @Override
     public String toString() {
-        return "Tb_ProductType{" +
+        return "Tb_ProductTypeEntity{" +
                 "typeId=" + typeId +
                 ", typeName='" + typeName + '\'' +
                 '}';

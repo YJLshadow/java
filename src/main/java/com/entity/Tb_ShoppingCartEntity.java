@@ -2,23 +2,23 @@ package com.entity;
 
 import java.util.Date;
 
-public class Tb_ShoppingCart {
+public class Tb_ShoppingCartEntity {
 
     private Integer scId;
     private Integer userId;
     private String productCode;
     private Date scData;
 
-    public Tb_ShoppingCart() {
+    public Tb_ShoppingCartEntity() {
     }
 
-    public Tb_ShoppingCart(Integer userId, String productCode, Date scData) {
+    public Tb_ShoppingCartEntity(Integer userId, String productCode, Date scData) {
         this.userId = userId;
         this.productCode = productCode;
         this.scData = scData;
     }
 
-    public Tb_ShoppingCart(Integer scId, Integer userId, String productCode, Date scData) {
+    public Tb_ShoppingCartEntity(Integer scId, Integer userId, String productCode, Date scData) {
         this.scId = scId;
         this.userId = userId;
         this.productCode = productCode;
@@ -59,7 +59,7 @@ public class Tb_ShoppingCart {
 
     @Override
     public String toString() {
-        return "Tb_ShoppingCart{" +
+        return "Tb_ShoppingCartEntity{" +
                 "scId=" + scId +
                 ", userId=" + userId +
                 ", productCode='" + productCode + '\'' +

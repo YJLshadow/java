@@ -1,26 +1,23 @@
 package com.entity;
 
-public class Tb_BankCard {
+public class Tb_BankCardEntity {
 
     private Integer cardId;
-    private Integer bankCardId;
     private Integer userId;
     private Integer bankId;
     private String bankCard;
 
-    public Tb_BankCard() {
+    public Tb_BankCardEntity() {
     }
 
-    public Tb_BankCard(Integer bankCardId, Integer userId, Integer bankId, String bankCard) {
-        this.bankCardId = bankCardId;
+    public Tb_BankCardEntity( Integer userId, Integer bankId, String bankCard) {
         this.userId = userId;
         this.bankId = bankId;
         this.bankCard = bankCard;
     }
 
-    public Tb_BankCard(Integer cardId, Integer bankCardId, Integer userId, Integer bankId, String bankCard) {
+    public Tb_BankCardEntity(Integer cardId, Integer userId, Integer bankId, String bankCard) {
         this.cardId = cardId;
-        this.bankCardId = bankCardId;
         this.userId = userId;
         this.bankId = bankId;
         this.bankCard = bankCard;
@@ -32,14 +29,6 @@ public class Tb_BankCard {
 
     public void setCardId(Integer cardId) {
         this.cardId = cardId;
-    }
-
-    public Integer getBankCardId() {
-        return bankCardId;
-    }
-
-    public void setBankCardId(Integer bankCardId) {
-        this.bankCardId = bankCardId;
     }
 
     public Integer getUserId() {
@@ -68,9 +57,8 @@ public class Tb_BankCard {
 
     @Override
     public String toString() {
-        return "Tb_BankCard{" +
+        return "Tb_BankCardEntity{" +
                 "cardId=" + cardId +
-                ", bankCardId=" + bankCardId +
                 ", userId=" + userId +
                 ", bankId=" + bankId +
                 ", bankCard='" + bankCard + '\'' +

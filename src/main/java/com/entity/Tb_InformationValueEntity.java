@@ -1,20 +1,20 @@
 package com.entity;
 
-public class Tb_InformationValue {
+public class Tb_InformationValueEntity {
 
     private Integer valueId;
     private Integer informationId;
     private String valueBody;
 
-    public Tb_InformationValue() {
+    public Tb_InformationValueEntity() {
     }
 
-    public Tb_InformationValue(Integer informationId, String valueBody) {
+    public Tb_InformationValueEntity(Integer informationId, String valueBody) {
         this.informationId = informationId;
         this.valueBody = valueBody;
     }
 
-    public Tb_InformationValue(Integer valueId, Integer informationId, String valueBody) {
+    public Tb_InformationValueEntity(Integer valueId, Integer informationId, String valueBody) {
         this.valueId = valueId;
         this.informationId = informationId;
         this.valueBody = valueBody;
@@ -46,7 +46,7 @@ public class Tb_InformationValue {
 
     @Override
     public String toString() {
-        return "Tb_InformationValue{" +
+        return "Tb_InformationValueEntity{" +
                 "valueId=" + valueId +
                 ", informationId=" + informationId +
                 ", valueBody='" + valueBody + '\'' +

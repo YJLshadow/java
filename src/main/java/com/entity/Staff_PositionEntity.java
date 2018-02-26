@@ -1,18 +1,18 @@
 package com.entity;
 
-public class Staff_Position {
+public class Staff_PositionEntity {
 
     private Integer staffId;
     private Integer positionId;
 
-    public Staff_Position() {
+    public Staff_PositionEntity() {
     }
 
-    public Staff_Position(Integer positionId) {
+    public Staff_PositionEntity(Integer positionId) {
         this.positionId = positionId;
     }
 
-    public Staff_Position(Integer staffId, Integer positionId) {
+    public Staff_PositionEntity(Integer staffId, Integer positionId) {
         this.staffId = staffId;
         this.positionId = positionId;
     }
@@ -35,7 +35,7 @@ public class Staff_Position {
 
     @Override
     public String toString() {
-        return "Staff_Position{" +
+        return "Staff_PositionEntity{" +
                 "staffId=" + staffId +
                 ", positionId=" + positionId +
                 '}';

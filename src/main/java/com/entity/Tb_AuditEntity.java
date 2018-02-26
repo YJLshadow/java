@@ -2,7 +2,7 @@ package com.entity;
 
 import java.util.Date;
 
-public class Tb_Audit {
+public class Tb_AuditEntity {
 
     private Integer auditId;
     private Integer staffId;
@@ -10,10 +10,10 @@ public class Tb_Audit {
     private String auditopinion;
     private Date auditDate;
 
-    public Tb_Audit() {
+    public Tb_AuditEntity() {
     }
 
-    public Tb_Audit(Integer staffId, Integer orderID, String auditopinion, Date auditDate) {
+    public Tb_AuditEntity(Integer staffId, Integer orderID, String auditopinion, Date auditDate) {
         this.staffId = staffId;
         this.orderID = orderID;
         this.auditopinion = auditopinion;
@@ -62,7 +62,7 @@ public class Tb_Audit {
 
     @Override
     public String toString() {
-        return "Tb_Audit{" +
+        return "Tb_AuditEntity{" +
                 "auditId=" + auditId +
                 ", staffId=" + staffId +
                 ", orderID=" + orderID +

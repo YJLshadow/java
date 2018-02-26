@@ -1,22 +1,22 @@
 package com.entity;
 
-public class Tb_Position {
+public class Tb_PositionEntity {
 
     private Integer positionId;
     private String positionName;
     private Integer departmentId;
     private String departmentRemark;
 
-    public Tb_Position() {
+    public Tb_PositionEntity() {
     }
 
-    public Tb_Position(String positionName, Integer departmentId, String departmentRemark) {
+    public Tb_PositionEntity(String positionName, Integer departmentId, String departmentRemark) {
         this.positionName = positionName;
         this.departmentId = departmentId;
         this.departmentRemark = departmentRemark;
     }
 
-    public Tb_Position(Integer positionId, String positionName, Integer departmentId, String departmentRemark) {
+    public Tb_PositionEntity(Integer positionId, String positionName, Integer departmentId, String departmentRemark) {
         this.positionId = positionId;
         this.positionName = positionName;
         this.departmentId = departmentId;
@@ -57,7 +57,7 @@ public class Tb_Position {
 
     @Override
     public String toString() {
-        return "Tb_Position{" +
+        return "Tb_PositionEntity{" +
                 "positionId=" + positionId +
                 ", positionName='" + positionName + '\'' +
                 ", departmentId=" + departmentId +

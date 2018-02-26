@@ -1,7 +1,7 @@
 package com.entity;
 
 
-public class Tb_Todo {
+public class Tb_TodoEntity {
 
     private Integer todoId;
     private Integer staffId;
@@ -9,17 +9,17 @@ public class Tb_Todo {
     private String todoBody;
     private Integer todoBodyState;
 
-    public Tb_Todo() {
+    public Tb_TodoEntity() {
     }
 
-    public Tb_Todo(Integer staffId, String todoTitle, String todoBody, Integer todoBodyState) {
+    public Tb_TodoEntity(Integer staffId, String todoTitle, String todoBody, Integer todoBodyState) {
         this.staffId = staffId;
         this.todoTitle = todoTitle;
         this.todoBody = todoBody;
         this.todoBodyState = todoBodyState;
     }
 
-    public Tb_Todo(Integer todoId, Integer staffId, String todoTitle, String todoBody, Integer todoBodyState) {
+    public Tb_TodoEntity(Integer todoId, Integer staffId, String todoTitle, String todoBody, Integer todoBodyState) {
         this.todoId = todoId;
         this.staffId = staffId;
         this.todoTitle = todoTitle;
@@ -69,7 +69,7 @@ public class Tb_Todo {
 
     @Override
     public String toString() {
-        return "Tb_Todo{" +
+        return "Tb_TodoEntity{" +
                 "todoId=" + todoId +
                 ", staffId=" + staffId +
                 ", todoTitle='" + todoTitle + '\'' +

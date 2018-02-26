@@ -1,6 +1,6 @@
 package com.entity;
 
-public class Tb_Product {
+public class Tb_ProductEntity {
 
     private String productCode;
     private String productName;
@@ -18,10 +18,10 @@ public class Tb_Product {
     private String image;
     private Integer productState;
 
-    public Tb_Product() {
+    public Tb_ProductEntity() {
     }
 
-    public Tb_Product(String productName, Integer typeId, String applyCrowd, String deadline, Integer issuerId, String insuranceType, Double premium, String insuranceBody, Double startMoney, Integer yield, String scale, String eamingsAllocation, String image, Integer productState) {
+    public Tb_ProductEntity(String productName, Integer typeId, String applyCrowd, String deadline, Integer issuerId, String insuranceType, Double premium, String insuranceBody, Double startMoney, Integer yield, String scale, String eamingsAllocation, String image, Integer productState) {
         this.productName = productName;
         this.typeId = typeId;
         this.applyCrowd = applyCrowd;
@@ -38,7 +38,7 @@ public class Tb_Product {
         this.productState = productState;
     }
 
-    public Tb_Product(String productCode, String productName, Integer typeId, String applyCrowd, String deadline, Integer issuerId, String insuranceType, Double premium, String insuranceBody, Double startMoney, Integer yield, String scale, String eamingsAllocation, String image, Integer productState) {
+    public Tb_ProductEntity(String productCode, String productName, Integer typeId, String applyCrowd, String deadline, Integer issuerId, String insuranceType, Double premium, String insuranceBody, Double startMoney, Integer yield, String scale, String eamingsAllocation, String image, Integer productState) {
         this.productCode = productCode;
         this.productName = productName;
         this.typeId = typeId;
@@ -178,7 +178,7 @@ public class Tb_Product {
 
     @Override
     public String toString() {
-        return "Tb_Product{" +
+        return "Tb_ProductEntity{" +
                 "productCode='" + productCode + '\'' +
                 ", productName='" + productName + '\'' +
                 ", typeId=" + typeId +
