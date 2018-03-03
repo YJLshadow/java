@@ -1,21 +1,16 @@
-package com.dao;
+package com.service;
 
-import com.entity.Tb_UserEntity;
-import org.apache.ibatis.annotations.Param;
+import com.entity.Tb_StaffEntity;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
-public interface IUserDao {
-    //查询所有
-    public List<Tb_UserEntity> queryList();
+public interface IStaffService {
     //带条件查询所有
-    public List<Tb_UserEntity> queryListBySql(String name,String userCard,String email,String staffId, int begin, int end);
+    public List<Tb_StaffEntity> queryList(String s, int begin, int end);
     //查询最大行
     public int getCount(String name);
     //修改前根据id查询
-    public Tb_UserEntity queryById(Integer userId);
+    public Tb_StaffEntity queryById(Integer userId);
     //增
     public boolean insert(Object object);
     //删
@@ -23,6 +18,5 @@ public interface IUserDao {
     public boolean delete(Object object);//只有一个的话就不用管
     //改
     public boolean update(Object object);
-
 
 }

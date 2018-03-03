@@ -3,14 +3,51 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.dao.UserDao">
+<mapper namespace="com.dao.IUserDao">
     <select id="queryListForUser" resultType="com.entity.Tb_UserEntity">
         select * from tb_user
     </select>
-    <select id="QueryUserById" parameterType="int" resultType="com.entity.Tb_UserEntity">
-        select * from user WHERE userId=#{userId}
+    <select id="queryListBySql" resultType="com.entity.Tb_UserEntity" >
+        select * from tb_user
+        <where>
+            <if test="name!=null and name!=''">
+                and name like '%${name}%'
+            </if>
+            <if test="userCard!=null and userCard!=''">
+                and userCard like '%${userCard}%'
+            </if>
+            <if test="email!=null and email!=''">
+                and email like '%${email}%'
+            </if>
+            <if test="staffId!=null and staffId!=''">
+                and staffId like '%${staffId}%'
+            </if>
+        </where>
+        limit #{start},#{end};
+    </select>
+    <select id="queryById" resultType="com.entity.Tb_UserEntity" parameterType="integer">
+        select * from tb_user
+        <where>
+            <if test="_parameter!=0">
+                userId = #{_parameter}
+            </if>
+        </where>
+    </select>
+    <select id="queryMax" resultType="integer" parameterType="String">
+        select count(*) from tb_user
+        <where>
+            <if test="_parameter!=null and _parameter!='' ">
+                name like #{_parameter}
+            </if>
+        </where>
     </select>
     <insert id="addUser" parameterType="com.entity.Tb_UserEntity">
- /*       INSERT INTO USER(pname,page) VALUES(#{name},#{page});*/
+        INSERT INTO tb_user(tel,password,name,gender,birth,userCard,address,head,email,assets,staffId) VALUES(#{tel},#{password},#{name},#{gender},#{birth},#{userCard},#{address},#{head},#{email},#{assets},#{staffId});
     </insert>
+    <update id="updateUser" parameterType="com.entity.Tb_UserEntity">
+        update tb_user set tel=#{tel},password=#{password},name=#{name},gender=#{gender},birth=#{birth},userCard=#{userCard},address=#{address},head=#{head},email=#{email},assets=#{assets},staffId=#{staffId} where userId=#{userId}
+    </update>
+    <delete id="deleteUser" parameterType="int">
+        delete from tb_user where userId=#{userId}
+    </delete>
 </mapper>

@@ -3,14 +3,45 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.dao.UserDao">
-    <select id="queryListForUser" resultType="com.entity.Tb_UserEntity">
-        select * from USER
+<mapper namespace="com.dao.IStaffDao">
+    <select id="queryListForStaff" resultType="com.entity.Tb_StaffEntity">
+        select * from tb_staff
     </select>
-    <select id="QueryUserById" parameterType="int" resultType="com.entity.Tb_UserEntity">
-        select * from user WHERE userId=#{userId}
+    <select id="queryListBySql" resultType="com.entity.Tb_StaffEntity" >
+        select * from tb_staff
+        <where>
+            <if test="staffName!=null and staffName!=''">
+                and staffName like '%${staffName}%'
+            </if>
+            <if test="staffCard!=null and staffCard!=''">
+                and staffCard like '%${staffCard}%'
+            </if>
+        </where>
+        limit #{start},#{end};
     </select>
-    <insert id="addUser" parameterType="com.entity.Tb_UserEntity">
- /*       INSERT INTO USER(pname,page) VALUES(#{name},#{page});*/
+    <select id="queryById" resultType="com.entity.Tb_StaffEntity" parameterType="integer">
+        select * from tb_staff
+        <where>
+            <if test="_parameter!=0">
+                staffId = #{_parameter}
+            </if>
+        </where>
+    </select>
+    <select id="queryMax" resultType="integer" parameterType="String">
+        select count(*) from tb_staff
+        <where>
+            <if test="_parameter!=null and _parameter!='' ">
+                staffName like #{_parameter}
+            </if>
+        </where>
+    </select>
+    <insert id="addStaff" parameterType="com.entity.Tb_StaffEntity">
+        INSERT INTO tb_staff(staffName,gender,staffCard,staffAddress,education,loginPassword,staffRemark,headerImage) VALUES(#{staffName},#{gender},#{staffCard},#{staffAddress},#{education},#{loginPassword},#{staffRemark},#{headerImage});
     </insert>
+    <update id="updateUser" parameterType="com.entity.Tb_StaffEntity">
+        update tb_user set tel=#{tel},password=#{password},name=#{name},gender=#{gender},birth=#{birth},userCard=#{userCard},address=#{address},head=#{head},email=#{email},assets=#{assets},staffId=#{staffId} where userId=#{userId}
+    </update>
+    <delete id="deleteUser" parameterType="int">
+        delete from tb_user where userId=#{userId}
+    </delete>
 </mapper>
