@@ -1,10 +1,13 @@
 package com.entity;
 
+import lombok.Data;
+
+@Data
 public class Tb_ProductEntity {
 
-    private String productCode;
-    private String productName;
-    private Integer typeId;
+    private String productCode;//产品编码
+    private String productName;//产品名
+    private Integer typeId;//铲平
     private String applyCrowd;
     private String deadline;
     private Integer issuerId;
@@ -55,127 +58,6 @@ public class Tb_ProductEntity {
         this.image = image;
         this.productState = productState;
     }
-
-    public String getProductCode() {
-        return productCode;
-    }
-
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public Integer getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
-    }
-
-    public String getApplyCrowd() {
-        return applyCrowd;
-    }
-
-    public void setApplyCrowd(String applyCrowd) {
-        this.applyCrowd = applyCrowd;
-    }
-
-    public String getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
-    }
-
-    public Integer getIssuerId() {
-        return issuerId;
-    }
-
-    public void setIssuerId(Integer issuerId) {
-        this.issuerId = issuerId;
-    }
-
-    public String getInsuranceType() {
-        return insuranceType;
-    }
-
-    public void setInsuranceType(String insuranceType) {
-        this.insuranceType = insuranceType;
-    }
-
-    public Double getPremium() {
-        return premium;
-    }
-
-    public void setPremium(Double premium) {
-        this.premium = premium;
-    }
-
-    public String getInsuranceBody() {
-        return insuranceBody;
-    }
-
-    public void setInsuranceBody(String insuranceBody) {
-        this.insuranceBody = insuranceBody;
-    }
-
-    public Double getStartMoney() {
-        return startMoney;
-    }
-
-    public void setStartMoney(Double startMoney) {
-        this.startMoney = startMoney;
-    }
-
-    public Integer getYield() {
-        return yield;
-    }
-
-    public void setYield(Integer yield) {
-        this.yield = yield;
-    }
-
-    public String getScale() {
-        return scale;
-    }
-
-    public void setScale(String scale) {
-        this.scale = scale;
-    }
-
-    public String getEamingsAllocation() {
-        return eamingsAllocation;
-    }
-
-    public void setEamingsAllocation(String eamingsAllocation) {
-        this.eamingsAllocation = eamingsAllocation;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public Integer getProductState() {
-        return productState;
-    }
-
-    public void setProductState(Integer productState) {
-        this.productState = productState;
-    }
-
     @Override
     public String toString() {
         return "Tb_ProductEntity{" +
