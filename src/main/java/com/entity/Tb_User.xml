@@ -10,20 +10,19 @@
     <select id="queryListBySql" resultType="com.entity.Tb_UserEntity" >
         select * from tb_user
         <where>
-            <if test="name!=null and name!=''">
-                and name like '%${name}%'
+            <if test="arg0!!=null and arg0!!=''">
+                name like '%${arg0!}%'
             </if>
-            <if test="userCard!=null and userCard!=''">
-                and userCard like '%${userCard}%'
+            <if test="arg1!=null and arg1!=''">
+                and userCard like '%${arg1}%'
             </if>
-            <if test="email!=null and email!=''">
-                and email like '%${email}%'
+            <if test="arg2!=null and arg2!=''">
+                and staffName like '%${arg2}%'
             </if>
-            <if test="staffId!=null and staffId!=''">
-                and staffId like '%${staffId}%'
+            <if test="arg3>=0 and arg4!=0">
+                limit #{arg3},#{arg4};
             </if>
         </where>
-        limit #{start},#{end};
     </select>
     <select id="queryById" resultType="com.entity.Tb_UserEntity" parameterType="integer">
         select * from tb_user
@@ -36,8 +35,14 @@
     <select id="queryMax" resultType="integer" parameterType="String">
         select count(*) from tb_user
         <where>
-            <if test="_parameter!=null and _parameter!='' ">
-                name like #{_parameter}
+            <if test="arg0!!=null and arg0!!=''">
+                name like '%${arg0!}%'
+            </if>
+            <if test="arg1!=null and arg1!=''">
+                and userCard like '%${arg1}%'
+            </if>
+            <if test="arg2!=null and arg2!=''">
+                and staffName like '%${arg2}%'
             </if>
         </where>
     </select>
@@ -47,7 +52,7 @@
     <update id="updateUser" parameterType="com.entity.Tb_UserEntity">
         update tb_user set tel=#{tel},password=#{password},name=#{name},gender=#{gender},birth=#{birth},userCard=#{userCard},address=#{address},head=#{head},email=#{email},assets=#{assets},staffId=#{staffId} where userId=#{userId}
     </update>
-    <delete id="deleteUser" parameterType="int">
-        delete from tb_user where userId=#{userId}
+    <delete id="deleteUser" parameterType="com.entity.Tb_UserEntity">
+        DELETE from tb_user where userId=#{userId}
     </delete>
 </mapper>

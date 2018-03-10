@@ -13,39 +13,39 @@ import java.util.List;
 public abstract class StaffService implements IStaffService {
     @Autowired
     IStaffDao iStaffDao;
-    public List<Tb_StaffEntity> queryList(){
-        return iStaffDao.queryList();
+    public List<Tb_StaffEntity> queryListForStaff(){
+        return iStaffDao.queryListForStaff();
     }
 
-    public List<Tb_StaffEntity> queryListBySql(String name, String userCard, String email, String staffId, int begin, int end) {
-        return iStaffDao.queryListBySql(name,userCard,email,staffId,begin,end);
+    public List<Tb_StaffEntity> queryListBySql(String staffName,String staffCard, int education, int begin, int end) {
+        return iStaffDao.queryListBySql(staffName,staffCard,education,begin,end);
     }
 
-    public int getCount(String sql) {
-        return iStaffDao.getCount(sql);
+    public int queryMax(String staffName,String staffCard, int education) {
+        return iStaffDao.queryMax(staffName,staffCard,education);
     }
 
     public Tb_StaffEntity queryById(Integer staffId) {
         return iStaffDao.queryById(staffId);
     }
 
-    public boolean insert(Object object) {
+    public boolean addStaff(Object object) {
         boolean f=false;
-        iStaffDao.insert(object);
+        iStaffDao.addStaff(object);
         f=true;
         return f;
     }
 
-    public boolean delete(Object object) {
+    public boolean deleteStaff(Object object) {
         boolean f=false;
-        iStaffDao.delete(object);
+        iStaffDao.deleteStaff(object);
         f=true;
         return f;
     }
 
-    public boolean update(Object object) {
+    public boolean updateStaff(Object object) {
         boolean f=false;
-        iStaffDao.update(object);
+        iStaffDao.updateStaff(object);
         f=true;
         return f;
     }

@@ -1,7 +1,9 @@
 package com.controller;
 
+import com.entity.Tb_StaffEntity;
 import com.entity.Tb_UserEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.service.impl.StaffService;
 import com.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +18,7 @@ import java.util.Map;
 @Controller
 public class StaffController {
     @Autowired
-    UserService userService;
+    StaffService staffService;
 
     @ResponseBody
     @RequestMapping("queryList")
@@ -24,28 +26,31 @@ public class StaffController {
         Map<String,Object> map=null;
         try {
             request.setCharacterEncoding("utf-8");//设置编码
-            String searchValue = request.getParameter("search");//搜索里面的值
+            String staffName = request.getParameter("staffName");//搜索里面的值
+            String staffCard = request.getParameter("staffCard");//搜索里面的值
+            String education = request.getParameter("education");//搜索里面的值
             String page = request.getParameter("page");//得到那边传过来的值
-            System.out.println(searchValue+":修改前");
-            if(searchValue!=null && searchValue!=""){
+            System.out.println(staffName+":修改前");
+            if(staffName!=null && staffName!="" && staffCard!=null && staffCard!="" && Integer.parseInt(education)!=0){
 //                searchValue = new String(searchValue.getBytes("iso-8859-1"), "utf-8");
+                System.out.println(staffName+""+staffCard+""+education+":修改前");
+
             }
             int end = 5;
             int begin = 0;
             if(page!=null){
                 begin =(Integer.parseInt(page)-1) * end;
             }
-            String sql = " from tb_user";
-            String sqls="select count(*) from tb_user ";
-            System.out.println(searchValue);
-            List<Tb_UserEntity> tb_userEntities=userService.queryListBySql("","","","",begin,end);
+//            String sql = " from tb_user";
+//            String sqls="select count(*) from tb_user ";
+            List<Tb_StaffEntity> tb_staffEntities=staffService.queryListBySql("","",0,1,3);
                 map = new HashMap<String, Object>();
-                int maxPage=userService.getCount(searchValue)/end;
-            if (userService.getCount(searchValue)%end!=0){
+                int maxPage=staffService.queryMax("","",0)/end;
+            if (staffService.queryMax("","",0)%end!=0){
                 maxPage=maxPage+1;
             }
             map.put("total",maxPage);
-            map.put("rowsList",tb_userEntities);
+            map.put("rowsList",tb_staffEntities);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -54,24 +59,24 @@ public class StaffController {
 
     //  查询单个的方法
     @ResponseBody
-    @RequestMapping(value="selectUserId")
-    public Tb_UserEntity queryStudentById(HttpServletRequest request) throws Exception{
+    @RequestMapping(value="selectStaffId")
+    public Tb_StaffEntity queryStudentById(HttpServletRequest request) throws Exception{
         request.setCharacterEncoding("utf-8");
-        String id = request.getParameter("id");
-        Tb_UserEntity stuEntit = userService.queryById(Integer.parseInt(id));
-        return stuEntit;
+        String staffId = request.getParameter("staffId");
+        Tb_StaffEntity tb_staffEntity = staffService.queryById(Integer.parseInt(staffId));
+        return tb_staffEntity;
     }
 
     //    增加的方法
     @ResponseBody
-    @RequestMapping("insert-Student")
+    @RequestMapping("insert-Staff")
     public String insertActor(HttpServletRequest request) throws Exception{
         request.setCharacterEncoding("utf-8");
         //ObjectMapper().readValue(request.getParameter("student"),StuEntity.class);将穿过来的字符串转化为对象
-        Tb_UserEntity tb_user = new ObjectMapper().readValue(request.getParameter("student"),Tb_UserEntity.class);
+        Tb_StaffEntity tb_staffEntity = new ObjectMapper().readValue(request.getParameter("staff"),Tb_StaffEntity.class);
 
         String result = "";
-        boolean f = userService.insert(tb_user);
+        boolean f = staffService.addStaff(tb_staffEntity);
         if(f){
             result = "success";
         }
@@ -80,13 +85,13 @@ public class StaffController {
 
     //    修改的方法
     @ResponseBody
-    @RequestMapping(value="update-Student")
+    @RequestMapping(value="update-Staff")
     public String updateActor(HttpServletRequest request) throws Exception{
         request.setCharacterEncoding("utf-8");
 
-        Tb_UserEntity stuEntity = new ObjectMapper().readValue(request.getParameter("student"),Tb_UserEntity.class);
+        Tb_StaffEntity tb_staffEntity = new ObjectMapper().readValue(request.getParameter("staff"),Tb_StaffEntity.class);
         String result = "";
-        boolean f = userService.update(stuEntity);
+        boolean f = staffService.updateStaff(tb_staffEntity);
         if(f){
             result = "success";
         }
@@ -95,14 +100,14 @@ public class StaffController {
 
     //    删除学生的方法
     @ResponseBody
-    @RequestMapping(value="delete-Student")
+    @RequestMapping(value="delete-Staff")
     public String deleteStudent(HttpServletRequest request) throws Exception{
         request.setCharacterEncoding("utf-8");
 
         String id = request.getParameter("id");
-        Tb_UserEntity stuEntity = userService.queryById(Integer.parseInt(id));
+        Tb_StaffEntity tb_staffEntity = staffService.queryById(Integer.parseInt(id));
         String result = "";
-        boolean f = userService.delete(stuEntity);
+        boolean f = staffService.deleteStaff(tb_staffEntity);
         if(f){
             result = "success";
         }
