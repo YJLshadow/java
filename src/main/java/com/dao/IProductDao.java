@@ -1,4 +1,4 @@
-package com.dao.YJL;
+package com.dao;
 
 public interface IProductDao {
 }

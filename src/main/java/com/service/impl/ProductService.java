@@ -1,4 +1,4 @@
-package com.service.YJL.impl;
+package com.service.impl;
 
 public class ProductService {
 }
