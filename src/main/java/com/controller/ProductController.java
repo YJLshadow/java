@@ -1,4 +1,4 @@
-package com.controller.YJL;
+package com.controller;
 
 public class ProductController {
     //产品表
