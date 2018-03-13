@@ -11,7 +11,7 @@ public interface IBankCardService {
 
     public List<Tb_BankCardEntity> getall();
 
-    public List<Tb_BankCardEntity> selectWhere(String start,String end,String id,String bankCard);
+    public List<Tb_BankCardEntity> selectWhere(String index, String bankId, String userId, String bankCard);
 
 
     public Tb_BankCardEntity getbyid(String cardId);
@@ -22,9 +22,9 @@ public interface IBankCardService {
 
 
 
-    public void deleteTb_BankCard(String bankdId);
+    public void deleteTb_BankCard(String cardId);
 
 
-    public int getMax(String id,String bankCard);
+    public int getMax(String bankId, String userId, String bankCard);
 
 }

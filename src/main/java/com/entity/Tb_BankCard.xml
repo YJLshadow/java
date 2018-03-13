@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.IBankCardDao">
+    <select id="selectWhere" resultType="com.entity.Tb_BankCardEntity" parameterType="String">
+        select * from tb_bankcard
+        <where>
+            <if test="bankCard!=null and bankCard!=''">
+                bankCard like '%${bankCard}%'
+            </if>
+            <if test="bankId!=0">
+                bankId=#{bankId}
+            </if>
+            <if test="userId!=0">
+                userId=#{userId}
+            </if>
+        </where>
+        limit #{start},#{end};
+    </select>
+
+    <insert id="addTb_BankCard" parameterType="com.entity.Tb_BankCardEntity">
+        insert into tb_bankcard(userId,bankId,bankCard) values(#{userId},#{bankId},#{bankCard})
+    </insert>
+
+    <select id="getbyid" resultType="com.entity.Tb_BankCardEntity" parameterType="int">
+        select * from tb_bankcard where cardId=#{cardId}
+    </select>
+
+    <update id="updateTb_BankCard" parameterType="com.entity.Tb_BankCardEntity">
+        update tb_bankcard set userId=#{userId},bankId=#{bankId},bankCard=#{bankCard} where cardId=#{cardId}
+    </update>
+
+    <delete id="deleteTb_BankCard" parameterType="int">
+        delete from tb_bankcard where cardId=#{cardId}
+    </delete>
+
+    <select id="getMax" resultType="int" parameterType="String">
+        select count(*) from tb_bankcard
+        <where>
+            <if test="bankCard!=null and bankCard!=''">
+                bankCard like '%${bankCard}%'
+            </if>
+            <if test="bankId!=0">
+                bankId=#{bankId}
+            </if>
+            <if test="userId!=0">
+                userId=#{userId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.IOrderDao">
+    <select id="selectWhere" resultType="com.entity.Tb_OrderEntity" parameterType="String">
+        select * from tb_order
+        <where>
+            <if test="userId!=0">
+                userId=#{userId}
+            </if>
+            <if test="staffId!=0">
+                staffId=#{staffId}
+            </if>
+            <if test="orderType!=0">
+                orderType=#{orderType}
+            </if>
+        </where>
+        limit #{start},#{end};
+    </select>
+
+    <insert id="addTb_Order" parameterType="com.entity.Tb_OrderEntity">
+        insert into tb_order(userId,productCode,orderMoney,orderDate,orderState,orderFrom,staffId,orderType) values(#{userId},#{productCode},#{orderMoney},#{orderDate},#{orderState},#{orderFrom},#{staffId},#{orderType})
+    </insert>
+
+    <select id="getbyid" resultType="com.entity.Tb_OrderEntity" parameterType="int">
+        select * from tb_order where orderID=#{orderID}
+    </select>
+
+    <update id="updateTb_Order" parameterType="com.entity.Tb_OrderEntity">
+        update tb_order set userId=#{userId},productCode=#{productCode},orderMoney=#{orderMoney},orderDate=#{orderDate},orderState=#{orderState},orderFrom=#{orderFrom},staffId=#{staffId},orderType=#{orderType} where orderID=#{orderID}
+    </update>
+
+    <delete id="deleteTb_Order" parameterType="int">
+        delete from tb_order where orderID=#{orderID}
+    </delete>
+
+    <select id="getMax" resultType="int" parameterType="String">
+        select count(*) from tb_order
+        <where>
+            <if test="userId!=0">
+                userId=#{userId}
+            </if>
+            <if test="staffId!=0">
+                staffId=#{staffId}
+            </if>
+            <if test="orderType!=0">
+                orderType=#{orderType}
+            </if>
+        </where>
+    </select>
+
+</mapper>

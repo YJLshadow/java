@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.IAuditDao">
+    <select id="selectWhere" resultType="com.entity.Tb_AuditEntity" parameterType="int">
+        select * from tb_audit
+        <where>
+            <if test="staffId!=0">
+                staffId=#{staffId}
+            </if>
+            <if test="orderId!=0">
+                orderId=#{orderId}
+            </if>
+        </where>
+        limit #{start},#{end};
+    </select>
+
+    <insert id="addTb_Audit" parameterType="com.entity.Tb_AuditEntity">
+        insert into tb_audit(staffId,orderId,auditopinion,auditDate) values(#{staffId},#{orderId},#{auditopinion},#{auditDate})
+    </insert>
+
+    <select id="getbyid" resultType="com.entity.Tb_AuditEntity" parameterType="int">
+        select * from tb_audit where auditId=#{auditId}
+    </select>
+
+    <update id="updateTb_Audit" parameterType="com.entity.Tb_AuditEntity">
+        update tb_audit set staffId=#{staffId},orderId=#{orderId},auditopinion=#{auditopinion},auditDate=#{auditDate} where auditId=#{auditId}
+    </update>
+
+    <select id="getMax" resultType="int" parameterType="int">
+        select count(*) from tb_audit
+        <where>
+            <if test="staffId!=0">
+                staffId=#{staffId}
+            </if>
+            <if test="orderId!=0">
+                orderId=#{orderId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

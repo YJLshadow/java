@@ -1,9 +1,9 @@
 package com.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.entity.Tb_AuditEntity;
 import com.entity.Tb_BankCardEntity;
-import com.entity.Tb_BankEntity;
-import com.service.IBankCardService;
+import com.service.IAuditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +15,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping(value = "bankCard")
+@RequestMapping(value = "audit")
 @Controller
-public class BankCardController {
+public class AuditController {
 
     @Autowired
-    IBankCardService iBankCardService;
+    IAuditService iAuditService;
+
 
     @ResponseBody
     @RequestMapping(value = "selectWhere")
@@ -28,15 +29,14 @@ public class BankCardController {
         Map<String, Object> map = null ;
         try {
             request.setCharacterEncoding("utf-8");
-            String bankCard = request.getParameter("bankCard");
-            String userId = request.getParameter("userId");
-            String bankId = request.getParameter("bankId");
+            String staffId = request.getParameter("staffId");
+            String orderId = request.getParameter("orderId");
             String index = request.getParameter("index");
-            List<Tb_BankCardEntity> bankCardEntities= iBankCardService.selectWhere(index, (bankId==null?"":bankId),(userId==null?"":userId),(bankCard==null?"":bankCard));
+            List<Tb_AuditEntity> auditEntities= iAuditService.selectWhere(index, (staffId==null?"":staffId),(orderId==null?"":orderId));
             map = new HashMap<String, Object>();
-            int maxPage=iBankCardService.getMax(bankId,userId,bankCard);
+            int maxPage=iAuditService.getMax(staffId,orderId);
             map.put("totals", maxPage);
-            map.put("rowsList",bankCardEntities);
+            map.put("rowsList",auditEntities);
         } catch (Exception e1) {
             e1.printStackTrace();
         }
@@ -46,29 +46,29 @@ public class BankCardController {
 
     @ResponseBody
     @RequestMapping(value = "getById")
-    public Tb_BankCardEntity getById(HttpServletRequest request){
+    public Tb_AuditEntity getById(HttpServletRequest request){
         try {
             request.setCharacterEncoding("utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         String id = request.getParameter("cardId");
-        Tb_BankCardEntity bankCardEntity = iBankCardService.getbyid(id);
-        return bankCardEntity;
+        Tb_AuditEntity auditEntity = iAuditService.getbyid(id);
+        return auditEntity;
     }
 
     @ResponseBody
-    @RequestMapping(value = "addTb_BankCard")
-    public String addTb_BankCard(HttpServletRequest request){
+    @RequestMapping(value = "addTb_Audit")
+    public String addTb_Audit(HttpServletRequest request){
         try {
             request.setCharacterEncoding("utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        Tb_BankCardEntity bankCardEntity = JSON.parseObject(request.getParameter("bankCardEntity"),Tb_BankCardEntity.class);
+        Tb_AuditEntity auditEntity = JSON.parseObject(request.getParameter("auditEntity"),Tb_AuditEntity.class);
         String message = "";
         try {
-            iBankCardService.addTb_BankCard(bankCardEntity);
+            iAuditService.addTb_Audit(auditEntity);
             message = "增加成功！";
         }catch (Exception e){
             message = "增加失败！";
@@ -77,37 +77,19 @@ public class BankCardController {
         return message;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "deleteTb_BankCard")
-    public String deleteTb_BankCard(HttpServletRequest request){
-        try {
-            request.setCharacterEncoding("utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        String id = request.getParameter("cardId");
-        String result = "";
-        try {
-            iBankCardService.deleteTb_BankCard(id);
-            result = "删除成功！";
-        }catch (Exception e){
-            result = "删除失败！";
-        }
-        return result;
-    }
 
     @ResponseBody
-    @RequestMapping(value = "updateTb_BankCard")
-    public String updateTb_BankCard(HttpServletRequest request){
+    @RequestMapping(value = "updateTb_Audit")
+    public String updateTb_Audit(HttpServletRequest request){
         try {
             request.setCharacterEncoding("utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        Tb_BankCardEntity bankCardEntity = JSON.parseObject(request.getParameter("bankCardEntity"),Tb_BankCardEntity.class);
+        Tb_AuditEntity auditEntity = JSON.parseObject(request.getParameter("auditEntity"),Tb_AuditEntity.class);
         String message = "";
         try {
-            iBankCardService.updateTb_BankCard(bankCardEntity);
+            iAuditService.updateAudit(auditEntity);
             message = "修改成功！";
         }catch (Exception e){
             message = "修改失败！";

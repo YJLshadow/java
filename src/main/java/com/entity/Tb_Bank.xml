@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.IBankDao">
+    <select id="selectWhere" resultType="com.entity.Tb_BankEntity" parameterType="String">
+        select * from tb_bank
+        <where>
+            <if test="bankName!=null and bankName!=''">
+                bankName like '%${bankName}%'
+            </if>
+        </where>
+        limit #{start},#{end};
+    </select>
+
+    <insert id="addTb_Bank" parameterType="com.entity.Tb_BankEntity">
+        insert into tb_bank(bankName,bankRemark,bankDate) values(#{bankName},#{bankRemark},#{bankDate})
+    </insert>
+
+    <select id="getbyid" resultType="com.entity.Tb_BankEntity" parameterType="int">
+        select * from tb_bank where bankId=#{bankId}
+    </select>
+
+    <update id="updateTb_Bank" parameterType="com.entity.Tb_BankEntity">
+        update tb_bank set bankName=#{bankName},bankRemark=#{bankRemark},bankDate=#{bankDate} where bankId=#{bankId}
+    </update>
+
+    <delete id="deleteTb_Bank" parameterType="int">
+        delete from tb_bank where bankId=#{bankId}
+    </delete>
+
+    <select id="getMax" resultType="int" parameterType="String">
+        select count(*) from tb_bank
+        <where>
+            <if test="bankName!=null and bankName!=''">
+                bankName like '%${bankName}%'
+            </if>
+        </where>
+    </select>
+
+</mapper>

@@ -11,7 +11,7 @@ public interface ICompanyService {
 
     public List<Tb_CompanyEntity> getall();
 
-    public List<Tb_CompanyEntity> selectWhere(String start,String end,String companyName);
+    public List<Tb_CompanyEntity> selectWhere(String index, String companyName);
 
 
     public Tb_CompanyEntity getbyid(String companyId);

@@ -1,9 +1,11 @@
 package com.dao;
 
 import com.entity.Tb_CompanyEntity;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ICompanyDao {
 
     public void addTb_Company(Tb_CompanyEntity companyEntity);

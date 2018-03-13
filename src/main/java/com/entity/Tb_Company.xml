@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.ICompanyDao">
+    <select id="selectWhere" resultType="com.entity.Tb_CompanyEntity" parameterType="String">
+        select * from tb_company
+        <where>
+            <if test="companyName!=null and companyName!=''">
+                companyName like '%${companyName}%'
+            </if>
+        </where>
+        limit #{start},#{end};
+    </select>
+
+    <insert id="addTb_Company" parameterType="com.entity.Tb_CompanyEntity">
+        insert into tb_company(companyName,companyDate,companyRemark) values(#{companyName},#{companyDate},#{companyRemark})
+    </insert>
+
+    <select id="getbyid" resultType="com.entity.Tb_CompanyEntity" parameterType="int">
+        select * from tb_company where companyId=#{companyId}
+    </select>
+
+    <update id="updateTb_Company" parameterType="com.entity.Tb_CompanyEntity">
+        update tb_company set companyName=#{companyName},companyDate=#{companyDate},companyRemark=#{companyRemark} where companyId=#{companyId}
+    </update>
+
+    <delete id="deleteTb_Company" parameterType="int">
+        delete from tb_company where companyId=#{companyId}
+    </delete>
+
+    <select id="getMax" resultType="int" parameterType="String">
+        select count(*) from tb_company
+        <where>
+            <if test="companyName!=null and companyName!=''">
+                companyName like '%${companyName}%'
+            </if>
+        </where>
+    </select>
+
+</mapper>

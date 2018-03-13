@@ -1,9 +1,11 @@
 package com.dao;
 
 import com.entity.Tb_BankEntity;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface IBankDao {
 
 
