@@ -25,7 +25,6 @@ public class BankController {
     @ResponseBody
     @RequestMapping(value = "selectWhere")
     public Map<String,Object> selectWhere(HttpServletRequest request){
-        System.out.println(1111);
         Map<String, Object> map = null ;
         try {
             request.setCharacterEncoding("utf-8");
