@@ -342,6 +342,7 @@
 
 
     var pageIndex = 1;
+    var searchValue="";
     var bank_Vue = new Vue({
         el : "#bankList",
         data : {
@@ -357,7 +358,8 @@
             getall : function(){
                 var _this = this;
                 $.ajax({
-                    url : "../bank/selectWhere.action",
+                    url : "../../bank/selectWhere.action",
+                    date: "bankName="+searchValue+"&index="+pageIndex,
                     dataType : "JSON",
                     type : "get",
                     success : function(data){
