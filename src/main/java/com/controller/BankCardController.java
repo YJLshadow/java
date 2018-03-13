@@ -3,12 +3,14 @@ package com.controller;
 import com.entity.Tb_BankCardEntity;
 import com.service.IBankCardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+@Controller
 public class BankCardController {
 
     @Autowired
