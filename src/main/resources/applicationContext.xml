@@ -29,15 +29,15 @@
     </bean>
 
     <!--配置 Mybatis 的接口包-->
-    <!--<bean id="iStuDao" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
-        <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>-->
-        <!--<property name="mapperInterface" value="com.dao.IStuDao"></property>-->
-    <!--</bean>-->
-
-    <bean id="scannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <!-- 加载 所有对应的接口类-->
-        <property name="basePackage" value="com.dao"></property>
+    <bean id="iProductDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="com.dao.IProductDao"></property>
     </bean>
+
+    <!--<bean id="scannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--&lt;!&ndash; 加载 所有对应的接口类&ndash;&gt;-->
+        <!--<property name="basePackage" value="com.dao"></property>-->
+    <!--</bean>-->
 
 
 </beans>

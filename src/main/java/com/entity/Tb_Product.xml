@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间-->
+<mapper namespace="com.dao.IProductDao">
+    <!--增加-->
+    <insert id="insert" parameterType="com.entity.Tb_ProductEntity">
+        INSERT INTO tb_product(productCode,productName,typeId,applyCrowd,deadline,issuerId,insuranceType,premium,insuranceBody,startMoney,yield,scale,eamingsAllocation,image,productState) VALUE
+        (#{productCode},#{productName},#{typeId},#{applyCrowd},#{deadline},#{issuerId},#{insuranceType},#{premium},#{insuranceBody},#{startMoney},#{yield},#{scale},#{eamingsAllocation},#{image},#{productState})
+    </insert>
+    <!--删除-->
+    <delete id="delete" parameterType="int">
+        DELETE FROM tb_product WHERE productCode=#{productCode}
+    </delete>
+    <!--修改-->
+    <update id="update" parameterType="com.entity.Tb_ProductEntity">
+        UPDATE tb_product SET productCode=#{productCode},productName=#{productName},typeId=#{typeId},applyCrowd=#{applyCrowd},deadline=#{deadline},issuerId=#{issuerId},insuranceType=#{insuranceType},premium=#{premium},insuranceBody=#{insuranceBody},startMoney=#{startMoney},yield=#{yield},scale=#{scale},eamingsAllocation=#{eamingsAllocation},image=#{image},productState=#{productState}
+    </update>
+    <!--查询所有-->
+    <select id="queryList" resultType="com.entity.Tb_ProductEntity" >
+        SELECT * FROM tb_product
+        <choose>
+            <when test="sql!=null and sql!=''">
+                #{sql} limit #{begin},#{end}
+            </when>
+            <otherwise>
+                limit #{begin},#{end}
+            </otherwise>
+        </choose>
+    </select>
+    <!--查-->
+    <select id="queryMap" resultType="com.entity.Tb_ProductEntity">
+        SELECT * FROM tb_product
+        <choose>
+            <when test="sql!=null and sql!=''">
+                #{sql} limit #{begin},#{end}
+            </when>
+            <otherwise>
+                limit #{begin},#{end}
+            </otherwise>
+        </choose>
+    </select>
+    <!--查询单个 查询必须返回查询对应的类（必须要有parameterType）（parameterType可有可无）-->
+    <select id="query" parameterType="int" resultType="com.entity.Tb_ProductEntity">
+        SELECT * FROM tb_product WHERE productCode=#{productCode}
+    </select>
+    <!--查询数量-->
+    <select id="getCount" parameterType="String" resultType="int">
+        SELECT count(*) FROM tb_product
+        <choose>
+            <when test="sql!=null and sql!=''">
+                WHERE #{sql}
+            </when>
+            <otherwise></otherwise>
+    </choose>
+    </select>
+</mapper>

@@ -111,5 +111,14 @@
   </dependencies>
   <build>
     <finalName>finance</finalName>
+
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes><!--包含包过-->
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
+    </resources>
   </build>
 </project>

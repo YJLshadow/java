@@ -2,39 +2,22 @@ package com.service;
 
 import com.entity.Tb_BankCardEntity;
 import com.entity.Tb_ProductEntity;
+import org.apache.ibatis.annotations.Param;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public interface IProductService {
-    /**
-     * 增加产品
-     * @param productEntity
-     */
-    public void addTb_Product(Tb_ProductEntity productEntity);
+    //增
+    public boolean insert(Object object);
+    //删
+    public boolean delete(Object object);//只有一个的话就不用管
+    //改
+    public boolean update(Object object);
 
-    /**
-     * 查询全部
-     * @return
-     */
-    public List<Tb_ProductEntity> getAll();
-
-
-    public List<Tb_ProductEntity> selectWhere(String start,String end,String id,String bankCard);
-
-
-    public Tb_ProductEntity getById(String cardId);
-
-
-
-    public void updateTb_Product(Tb_BankCardEntity bankCardEntity);
-
-
-    /**
-     * 根据id删除
-     * @param productCode
-     */
-    public void deleteTb_Product(String productCode);
-
-
-    public int getMax(String id,String bankCard);
+    public List<Tb_ProductEntity> queryList(@Param("sql") String sql, @Param("begin") int begin, @Param("end") int end);
+    public Map<String, Object> queryMap(@Param("sql") String sql, @Param("begin") int begin, @Param("end") int end);
+    public Tb_ProductEntity query(@Param("id") Serializable serializable);//修改时候需要
+    public int getCount(@Param("sql")String sql);
 }
