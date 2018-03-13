@@ -24,28 +24,26 @@ public class UserController {
         Map<String,Object> map=null;
         try {
             request.setCharacterEncoding("utf-8");//设置编码
-            String searchName = request.getParameter("name");//搜索里面的值
-            String searchUserCard = request.getParameter("userCard");//搜索里面的值
-            String  searchEmail= request.getParameter("email");//搜索里面的值
-            String searchStaffId = request.getParameter("staffId");//搜索里面的值
+            String userName = request.getParameter("name");//搜索里面的值
+            String userCard = request.getParameter("userCard");//搜索里面的值
+            String staffName = request.getParameter("staffName");//搜索里面的值
             String page = request.getParameter("page");//得到那边传过来的值
-            if(searchName!=null && searchName!="" && searchUserCard!=null && searchUserCard!="" && searchEmail!=null && searchEmail!="" && searchStaffId!=null && searchStaffId!=""){
+            if(userName!=null && userName!="" && userCard!=null && userCard!="" && staffName!=null && staffName!=""){
 //                searchValue = new String(searchValue.getBytes("iso-8859-1"), "utf-8");
-                System.out.println(searchName+""+searchUserCard+""+searchEmail+""+searchStaffId+":修改前");
+                System.out.println(userName+""+userCard+""+staffName+":修改前");
 
             }
             int end = 5;
-            int begin = 0;
+            int begin = 1;
             if(page!=null){
                 begin =(Integer.parseInt(page)-1) * end;
             }
-//            String sql = " from tb_user";
-            String sqls="select count(*) from tb_user ";
-            List<Tb_UserEntity> tb_userEntities=userService.queryListBySql("","","","",begin,end);
+            List<Tb_UserEntity> tb_userEntities=userService.queryListBySql("","","",begin,end);
                 map = new HashMap<String, Object>();
-                int maxPage=userService.getCount(sqls)/end;
-            if (userService.getCount(sqls)%end!=0){
+                int maxPage=userService.queryMax("","","")/end;
+            if (userService.queryMax("","","")%end!=0){
                 maxPage=maxPage+1;
+                System.out.println(maxPage+"sss"+tb_userEntities);
             }
             map.put("total",maxPage);
             map.put("rowsList",tb_userEntities);
@@ -67,13 +65,13 @@ public class UserController {
 
     //    增加的方法
     @ResponseBody
-    @RequestMapping("insert-Student")
+    @RequestMapping("insert-user")
     public String insertActor(HttpServletRequest request) throws Exception{
         request.setCharacterEncoding("utf-8");
         //ObjectMapper().readValue(request.getParameter("student"),StuEntity.class);将穿过来的字符串转化为对象
         Tb_UserEntity tb_user = new ObjectMapper().readValue(request.getParameter("student"),Tb_UserEntity.class);
         String result = "";
-        boolean f = userService.insert(tb_user);
+        boolean f = userService.addUser(tb_user);
         if(f){
             result = "success";
         }
@@ -82,12 +80,12 @@ public class UserController {
 
     //    修改的方法
     @ResponseBody
-    @RequestMapping(value="update-Student")
+    @RequestMapping(value="update-user")
     public String updateActor(HttpServletRequest request) throws Exception{
         request.setCharacterEncoding("utf-8");
         Tb_UserEntity stuEntity = new ObjectMapper().readValue(request.getParameter("student"),Tb_UserEntity.class);
         String result = "";
-        boolean f = userService.update(stuEntity);
+        boolean f = userService.updateUser(stuEntity);
         if(f){
             result = "success";
         }
@@ -96,13 +94,13 @@ public class UserController {
 
     //    删除学生的方法
     @ResponseBody
-    @RequestMapping(value="delete-Student")
+    @RequestMapping(value="delete-user")
     public String deleteStudent(HttpServletRequest request) throws Exception{
         request.setCharacterEncoding("utf-8");
         String id = request.getParameter("id");
         Tb_UserEntity stuEntity = userService.queryById(Integer.parseInt(id));
         String result = "";
-        boolean f = userService.delete(stuEntity);
+        boolean f = userService.deleteUser(stuEntity);
         if(f){
             result = "success";
         }

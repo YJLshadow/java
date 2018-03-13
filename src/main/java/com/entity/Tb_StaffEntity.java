@@ -1,6 +1,11 @@
 package com.entity;
 
-public class Tb_StaffEntity {
+import lombok.Data;
+
+import java.io.Serializable;
+
+@Data
+public class Tb_StaffEntity implements Serializable{
 
     private Integer staffId;
     private String staffName;
@@ -38,77 +43,6 @@ public class Tb_StaffEntity {
         this.headerImage = headerImage;
     }
 
-    public Integer getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(Integer staffId) {
-        this.staffId = staffId;
-    }
-
-    public String getStaffName() {
-        return staffName;
-    }
-
-    public void setStaffName(String staffName) {
-        this.staffName = staffName;
-    }
-
-    public Integer getGender() {
-        return gender;
-    }
-
-    public void setGender(Integer gender) {
-        this.gender = gender;
-    }
-
-    public String getStaffCard() {
-        return staffCard;
-    }
-
-    public void setStaffCard(String staffCard) {
-        this.staffCard = staffCard;
-    }
-
-    public String getStaffAddress() {
-        return staffAddress;
-    }
-
-    public void setStaffAddress(String staffAddress) {
-        this.staffAddress = staffAddress;
-    }
-
-    public Integer getEducation() {
-        return education;
-    }
-
-    public void setEducation(Integer education) {
-        this.education = education;
-    }
-
-    public String getLoginPassword() {
-        return loginPassword;
-    }
-
-    public void setLoginPassword(String loginPassword) {
-        this.loginPassword = loginPassword;
-    }
-
-    public String getStaffRemark() {
-        return staffRemark;
-    }
-
-    public void setStaffRemark(String staffRemark) {
-        this.staffRemark = staffRemark;
-    }
-
-    public String getHeaderImage() {
-        return headerImage;
-    }
-
-    public void setHeaderImage(String headerImage) {
-        this.headerImage = headerImage;
-    }
 
     @Override
     public String toString() {
