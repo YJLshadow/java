@@ -34,16 +34,16 @@ public class UserController {
 
             }
             int end = 5;
-            int begin = 0;
+            int begin = 1;
             if(page!=null){
                 begin =(Integer.parseInt(page)-1) * end;
             }
-            String sqls="select count(*) from tb_user ";
             List<Tb_UserEntity> tb_userEntities=userService.queryListBySql("","","",begin,end);
                 map = new HashMap<String, Object>();
                 int maxPage=userService.queryMax("","","")/end;
             if (userService.queryMax("","","")%end!=0){
                 maxPage=maxPage+1;
+                System.out.println(maxPage+"sss"+tb_userEntities);
             }
             map.put("total",maxPage);
             map.put("rowsList",tb_userEntities);

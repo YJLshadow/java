@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public abstract class UserService implements IUserService {
+public class UserService implements IUserService {
     @Autowired
     IUserDao iUserDao;
     //查询所有

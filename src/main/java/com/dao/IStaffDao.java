@@ -1,9 +1,10 @@
 package com.dao;
 
 import com.entity.Tb_StaffEntity;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface IStaffDao {
     //查询所有
     public List<Tb_StaffEntity> queryListForStaff();

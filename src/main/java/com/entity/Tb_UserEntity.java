@@ -1,8 +1,12 @@
 package com.entity;
 
+import lombok.Data;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Tb_UserEntity {
+@Data
+public class Tb_UserEntity implements Serializable {
 
     private Integer userId;
     private String tel;
@@ -49,101 +53,6 @@ public class Tb_UserEntity {
         this.staffId = staffId;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getGender() {
-        return gender;
-    }
-
-    public void setGender(Integer gender) {
-        this.gender = gender;
-    }
-
-    public Date getBirth() {
-        return birth;
-    }
-
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
-
-    public String getUserCard() {
-        return userCard;
-    }
-
-    public void setUserCard(String userCard) {
-        this.userCard = userCard;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getHead() {
-        return head;
-    }
-
-    public void setHead(String head) {
-        this.head = head;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Double getAssets() {
-        return assets;
-    }
-
-    public void setAssets(Double assets) {
-        this.assets = assets;
-    }
-
-    public Integer getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(Integer staffId) {
-        this.staffId = staffId;
-    }
 
     @Override
     public String toString() {
