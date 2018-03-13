@@ -23,10 +23,12 @@
     <!-- CSS App -->
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
     <link rel="stylesheet" type="text/css" href="../../css/themes/flat-blue.css">
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/vue/vue.js"></script>
 </head>
 
 <body class="flat-blue">
-<div class="app-container"  >
+<div class="app-container" id="studentTable">
     <div class="row content-container">
         <nav class="navbar navbar-default navbar-fixed-top navbar-top" style="z-index: 0;"><!--防止下拉框被拦住-->
             <div class="container-fluid">
@@ -113,14 +115,23 @@
                         <form class="form-inline" style="margin-left: 7px; width: 42.5%;height: 100%; float: left;"><!--float: left;让后面一个-->
                             <div class="form-group" style="width: 200px">
                                 <select class="form-control input-lg" data-style="btn-info" style="width:69px;">
-                                    <option value ="volvo">请选择</option>
-                                    <option value ="姓名">姓名</option>
-                                    <option value="opel">Opel</option>
-                                    <option value="audi">Audi</option>
-                                    <option value ="volvo">Volvo</option>
-                                    <option value ="saab">Saab</option>
-                                    <option value="opel">Opel</option>
-                                    <option value="audi">Audi</option>
+                                    <option value ="volvo" >请选择</option>
+                                    <option value ="姓名">产品编码</option>
+                                    <option value="opel">产品名</option>
+                                    <option value="audi">产品类型</option>
+                                    <option value ="volvo">适用人群</option>
+                                    <option value ="saab">期限</option>
+                                    <option value="opel">发行机构(公司)</option>
+                                    <option value="audi">保险类型</option>
+                                    <option value ="姓名">产品编码</option>
+                                    <option value="opel">产品名</option>
+                                    <option value="audi">起购金额</option>
+                                    <option value ="volvo">预期收益率</option>
+                                    <option value ="saab">产品规模</option>
+                                    <option value="opel">收益分配方式</option>
+                                    <option value="audi">产品介绍图</option>
+                                    <option value="audi">产品状态</option>
+
                                 </select>
                                 <input type="text" class="form-control" id="exampleInputName2" placeholder="姓名" style="width: 60%;margin-left: 2%">
                             </div>
@@ -157,10 +168,10 @@
                         <td class="info" >保障内容</td>
                         <td class="info" >起购金额</td>
                         <td class="info" >预期收益率</td>
-                        <td class="info" >产品</td>
-                        <td class="info" >保费</td>
-                        <td class="info" >保障内容</td>
-                        <td class="info" >起购金额</td>
+                        <td class="info" >产品规模</td>
+                        <td class="info" >收益分配方式</td>
+                        <td class="info" >产品介绍图</td>
+                        <td class="info" >产品状态</td>
                         <td class="info" >操作</td>
                         </thead>
                         <tr align="center">
@@ -402,4 +413,185 @@
     </div>
 </div>
 </body>
+<script>
+    var pageIndex = 1;
+    var student_Vue = new Vue({
+        el : "#studentTable",
+        data : {
+            student : {productCode :"",productName : "",typeId : "",applyCrowd : "",deadline:"",issuerId:"",insuranceType:"",premium:"",insuranceBody:"",startMoney:"",yield:"",scale:"",eamingsAllocation:"",image:"",productState:""},
+            student_List : [],
+            maxPage : "",
+            modalTitle : "增加",
+            saveUrl : "",
+            selectedId : "",
+            currentIndex : 1,
+        },
+        methods:{
+            queryList : function(){
+                var _this = this;
+                $.ajax({
+                    url : "/queryList.action",
+                    dataType : "JSON",
+                    type : "post",
+                    success : function(data){
+                        _this._data.student_List = data.list;
+                        _this._data.maxPage = data.maxPage;
+                    }
+                })
+            },
+            //保存的方法
+            save : function(){
+                var _this = this;
+                $.ajax({
+                    url : _this.saveUrl,
+                    data : {student : JSON.stringify(_this.student)},
+                    type : "post",
+                    success : function(data){
+                        if(data){
+                            _this.modalHide();
+                            _this.queryList();
+                        }
+                    }
+                });
+            },
+
+            //查询单个的方法
+            queryStudent : function(id){
+                var _this = this;
+                $.ajax({
+                    url : "/selectStudentId.action",
+                    data : {id : id},
+                    dataType : "JSON",
+                    success : function(data){
+                        console.log(data);
+                        _this.student = data;
+                    }
+                });
+            },
+
+            //增加的方法
+            insertStudent : function(){
+                this.saveUrl = "/insert-Student.action";
+                this.modalTitle = "增加";
+                this.student = {};
+                this.modalShow();
+            },
+
+            //修改的方法
+            updateStudent : function(id){
+                this.saveUrl = "/update-Student.action";
+                this.modalTitle = "修改";
+                this.queryStudent(id);
+                this.modalShow();
+            },
+
+            deleteStudentId : function(id){
+                this.deleteModalShow();
+            },
+
+            //删除的方法
+            deleteStudent : function(id){
+                var _this = this;
+                $.ajax({
+                    url : "/delete-Student.action",
+                    dataType : "JSON",
+                    data : "id="+id,
+                    success : function(data){
+                        if(data){
+                            _this.deleteModalHide();
+                            _this.queryList();
+                        }
+                    }
+                });
+            },
+            //模态框隐藏
+            modalHide : function(){
+                $("#studentModal").modal("hide");
+            },
+            //删除模态框隐藏
+            deleteModalHide : function(){
+                $("#deleteStudentModal").modal("hide");
+            },
+            //删除模态框隐藏
+            deleteModalShow : function(){
+                $("#deleteStudentModal").modal("show");
+            },
+            //模态框显示
+            modalShow : function(){
+                $("#studentModal").modal("show");
+            },
+        },
+
+        created : function(){
+            this.queryList();
+        }
+    })
+
+    //下拉菜单
+    $(document).ready(function(){
+        $(".page").click(function(){
+            var maxPage = student_Vue._data.maxPage;
+            var selectPage = $(this).text();
+            if(selectPage == "首页"){
+                pageIndex = 1;
+                $("#lastPage").removeClass("button-selected");
+                $("#firstPage").addClass("button-selected");
+            }
+            else if(selectPage == "上一页"){
+                if(pageIndex>1){
+                    pageIndex = pageIndex -1;
+                }
+                if(pageIndex==1){
+                    $("#lastPage").removeClass("button-selected");
+                    $("#firstPage").addClass("button-selected");
+                }
+            }
+            else if(selectPage == "下一页"){
+                if(pageIndex<maxPage){
+                    pageIndex = pageIndex + 1;
+                }
+                if(pageIndex==maxPage){
+                    $("#firstPage").removeClass("button-selected");
+                    $("#lastPage").addClass("button-selected");
+                }
+            }
+            else if(selectPage == "末页"){
+                if(pageIndex!=maxPage){
+                    pageIndex = maxPage;
+                    $("#firstPage").removeClass("button-selected");
+                    $("#lastPage").addClass("button-selected");
+                }
+            }
+            var searchValue = $(".searchValue").val();
+            $.ajax({
+                url : "/queryList.action",
+                dataType : "JSON",
+                data : "page="+pageIndex+"&search="+searchValue,
+                success : function(data){
+                    student_Vue._data.student_List = data.list;
+                    student_Vue._data.maxPage = data.maxPage;
+                    student_Vue._data.currentIndex = pageIndex;
+                }
+            });
+
+        })
+
+//        模糊查询
+        $("#searchStudent").click(function(){
+            var searchValue = $(".searchValue").val();
+            $.ajax({
+                url: "/queryList.action",
+                dataType: "JSON",
+                data : "search="+ searchValue,
+                success: function(data) {
+                    student_Vue._data.student_List = data.list;
+                    student_Vue._data.maxPage = data.maxPage;
+                    student_Vue._data.currentIndex = data.maxPage;
+                }
+            });
+        })
+
+    })
+
+</script>
 </html>
