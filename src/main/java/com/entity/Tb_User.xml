@@ -10,7 +10,7 @@
     <select id="queryListBySql" resultType="com.entity.Tb_UserEntity" >
         select * from tb_user
         <where>
-            <if test="arg0!!=null and arg0!!=''">
+            <if test="arg0!=null and arg0!=''">
                 name like '%${arg0!}%'
             </if>
             <if test="arg1!=null and arg1!=''">
@@ -19,10 +19,8 @@
             <if test="arg2!=null and arg2!=''">
                 and staffName like '%${arg2}%'
             </if>
-            <if test="arg3>=0 and arg4!=0">
-                limit #{arg3},#{arg4};
-            </if>
         </where>
+        limit #{arg3},#{arg4};
     </select>
     <select id="queryById" resultType="com.entity.Tb_UserEntity" parameterType="integer">
         select * from tb_user
@@ -35,7 +33,7 @@
     <select id="queryMax" resultType="integer" parameterType="String">
         select count(*) from tb_user
         <where>
-            <if test="arg0!!=null and arg0!!=''">
+            <if test="arg0!=null and arg0!=''">
                 name like '%${arg0!}%'
             </if>
             <if test="arg1!=null and arg1!=''">

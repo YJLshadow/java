@@ -3,7 +3,6 @@ package com.controller;
 import com.entity.Tb_StaffEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.impl.StaffService;
-import com.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +19,7 @@ public class StaffController {
     StaffService staffService;
 
     @ResponseBody
-    @RequestMapping("queryList")
+    @RequestMapping(value = "queryList")
     public Map<String,Object> queryList(HttpServletRequest request) throws Exception{
         Map<String,Object> map=null;
         try {
@@ -68,7 +67,7 @@ public class StaffController {
 
     //    增加的方法
     @ResponseBody
-    @RequestMapping("insert-Staff")
+    @RequestMapping(value = "insert-Staff")
     public String insertActor(HttpServletRequest request) throws Exception{
         request.setCharacterEncoding("utf-8");
         //ObjectMapper().readValue(request.getParameter("student"),StuEntity.class);将穿过来的字符串转化为对象

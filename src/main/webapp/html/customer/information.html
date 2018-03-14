@@ -382,7 +382,7 @@
             var userCard = $(".userCard").val();
             var staffName = $(".staffName").val();
             $.ajax({
-                url: "../queryList.action",
+                url: "../../customer/queryUserList.action",
                 data: "name =" + name + "&userCard =" + userCard + "&staffName =" + staffName + "&page =" + pageIndex,
                 dataType: "JSON",
                 type: "post",

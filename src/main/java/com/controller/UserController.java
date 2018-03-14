@@ -19,7 +19,7 @@ public class UserController {
     UserService userService;
 
     @ResponseBody
-    @RequestMapping("queryList")
+    @RequestMapping(value = "queryUserList")
     public Map<String,Object> queryList(HttpServletRequest request) throws Exception{
         Map<String,Object> map=null;
         try {
@@ -35,9 +35,9 @@ public class UserController {
             }
             int end = 5;
             int begin = 1;
-            if(page!=null){
-                begin =(Integer.parseInt(page)-1) * end;
-            }
+//            if(page!=null){
+//                begin =(Integer.parseInt(page)-1) * end;
+//            }
             List<Tb_UserEntity> tb_userEntities=userService.queryListBySql("","","",begin,end);
                 map = new HashMap<String, Object>();
                 int maxPage=userService.queryMax("","","")/end;
@@ -65,11 +65,11 @@ public class UserController {
 
     //    增加的方法
     @ResponseBody
-    @RequestMapping("insert-user")
+    @RequestMapping(value = "insert-user")
     public String insertActor(HttpServletRequest request) throws Exception{
         request.setCharacterEncoding("utf-8");
         //ObjectMapper().readValue(request.getParameter("student"),StuEntity.class);将穿过来的字符串转化为对象
-        Tb_UserEntity tb_user = new ObjectMapper().readValue(request.getParameter("student"),Tb_UserEntity.class);
+        Tb_UserEntity tb_user = new ObjectMapper().readValue(request.getParameter("user"),Tb_UserEntity.class);
         String result = "";
         boolean f = userService.addUser(tb_user);
         if(f){
