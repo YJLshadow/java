@@ -373,7 +373,7 @@
                         }
                     })
                 }
-        }
+           }
     })
 
         $(".search").click(function () {
@@ -382,7 +382,7 @@
             var userCard = $(".userCard").val();
             var staffName = $(".staffName").val();
             $.ajax({
-                url: "../../customer/queryUserList.action",
+                url: "../queryList.action",
                 data: "name =" + name + "&userCard =" + userCard + "&staffName =" + staffName + "&page =" + pageIndex,
                 dataType: "JSON",
                 type: "post",
