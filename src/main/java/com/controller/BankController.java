@@ -25,7 +25,7 @@ public class BankController {
     @ResponseBody
     @RequestMapping(value = "selectWhere")
     public Map<String,Object> selectWhere(HttpServletRequest request){
-        System.out.println(1111);
+        System.out.println("11111111111111111111111111");
         Map<String, Object> map = null ;
         try {
             request.setCharacterEncoding("utf-8");
@@ -39,7 +39,7 @@ public class BankController {
         } catch (Exception e1) {
             e1.printStackTrace();
         }
-        System.out.println("111112345678987654"+map.toString());
+        System.out.println("11111111111111111111111111");
         return map;
     }
 
