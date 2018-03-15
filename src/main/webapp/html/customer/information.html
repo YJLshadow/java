@@ -40,52 +40,8 @@
                     </button>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
-                        <i class="fa fa-times icon"></i>
-                    </button>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-comments-o"></i></a>
-                        <ul class="dropdown-menu animated fadeInDown">
-                            <li class="title">
-                                Notification <span class="badge pull-right">0</span>
-                            </li>
-                            <li class="message">
-                                No new notification
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown danger">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-star-half-o"></i> 4</a>
-                        <ul class="dropdown-menu danger  animated fadeInDown">
-                            <li class="title">
-                                Notification <span class="badge pull-right">4</span>
-                            </li>
-                            <li>
-                                <ul class="list-group notifications">
-                                    <a href="#">
-                                        <li class="list-group-item">
-                                            <span class="badge">1</span> <i class="fa fa-exclamation-circle icon"></i> new registration
-                                        </li>
-                                    </a>
-                                    <a href="#">
-                                        <li class="list-group-item">
-                                            <span class="badge success">1</span> <i class="fa fa-check icon"></i> new orders
-                                        </li>
-                                    </a>
-                                    <a href="#">
-                                        <li class="list-group-item">
-                                            <span class="badge danger">2</span> <i class="fa fa-comments icon"></i> customers messages
-                                        </li>
-                                    </a>
-                                    <a href="#">
-                                        <li class="list-group-item message">
-                                            view all
-                                        </li>
-                                    </a>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
+
+
                     <li class="dropdown profile">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Emily Hart <span class="caret"></span></a>
                         <ul class="dropdown-menu animated fadeInDown">
@@ -134,13 +90,15 @@
                         <th class="info">操作</th>
                         </thead>
                         <tr v-for="user in user_List">
-                            <td class="active">{{user.userid}}</td>
+                            <td class="active">{{user.userId}}</td>
                             <td class="active">{{user.tel}}</td>
                             <td class="active">{{user.name}}</td>
                             <td class="active">{{user.assets}}</td>
                             <td class="active">{{user.staffId}}</td>
-                            <td class="active"><button type="button" class="btn btn-success btn-xs">修改</button>
-                            <button type="button" class="btn btn-danger btn-xs">删除</button></td>
+                            <td class="active">
+                                <button type="button" class="btn btn-success btn-xs">修改</button>
+                                <button type="button" class="btn btn-danger btn-xs">删除</button>
+                            </td>
                         </tr>
                     </table>
 
@@ -348,31 +306,36 @@
 
 <script>
     var pageIndex=1;
+    var name = $(".name").val();
+    var userCard = $(".userCard").val();
+    var staffName = $(".staffName").val();
     var user_Vue=new Vue({
         el:"#userList",
         data:{
-                user:{userId:"",tel:"",password:"",Name:"",gender:"",birth:"",userCard:"",address:"",head:"",email:"",assets:"",staffId:""},
+                user:{userId:"",tel:"",password:"",name:"",gender:"",birth:"",userCard:"",address:"",head:"",email:"",assets:"",staffId:""},
                 user_List:[],
                 maxPage:"",
+                modalTitle : "增加",
+                saveUrl : "",
                 selectedId:"",
                 currentIndex:1
         },methods:{
                 queryList:function () {
                     var _this=this;
-                    var name = $(".name").val();
-                    var userCard = $(".userCard").val();
-                    var staffName = $(".staffName").val();
                     $.ajax({
-                        url:"/queryList.action",
+                        url:"../../user/queryUserList.action",
                         data : "name ="+ name+"&userCard ="+userCard+"&staffName ="+staffName+"&page ="+pageIndex,
                         dataType:"JSON",
                         type:"post",
                         success:function (data) {
-                            _this.data.user_List=data.rowList;
-                            _this.data.maxPage=data.maxPage;
+                            _this._data.user_List=data.rowsList;
+                            _this._data.maxPage=data.totals;
                         }
                     })
                 }
+           },
+           created:function(){
+            this.queryList()
            }
     })
 
