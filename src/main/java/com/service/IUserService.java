@@ -7,12 +7,16 @@ import java.util.List;
 public interface IUserService {
     //直接查询所有
     public List<Tb_UserEntity> queryListForUser();
-    //带条件查询所有
-    public List<Tb_UserEntity> queryListBySql(String name,String userCard,String staffName, int begin, int end);
-    //查询最大行
-    public int queryMax(String name,String userCard,String staffName);
-    //修改前根据id查询
-    public Tb_UserEntity queryById(Integer userId);
+    //默认根据客户名字模糊查询
+    public List<Tb_UserEntity> queryListByUserName(String selectName,String userCard, int begin, int end);
+    //根据理财师id模糊查询
+    public List<Tb_UserEntity> queryListByStaffName(String selectStaffName,String userCard, int begin, int end);
+    //根据用户姓名查询最大行
+    public int queryMaxByUserName(String selectName,String userCard);
+    //根据理财师id查询最大行
+    public int queryMaxByStaffName(String selectStaffName,String userCard);
+    //修改前根据userid查询
+    public Tb_UserEntity queryByUserId(Integer userId);
     //增
     public boolean addUser(Object object);
     //删

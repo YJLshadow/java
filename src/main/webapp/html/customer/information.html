@@ -25,7 +25,7 @@
 <body class="flat-blue">
 <div class="app-container">
     <div class="row content-container">
-        <nav class="navbar navbar-default navbar-fixed-top navbar-top">
+        <nav class="navbar navbar-default navbar-fixed-top navbar-top" style="z-index: 0;">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-expand-toggle">
@@ -43,8 +43,8 @@
 
 
                     <li class="dropdown profile">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Emily Hart <span class="caret"></span></a>
-                        <ul class="dropdown-menu animated fadeInDown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role= "button" aria-expanded="false">Emily Hart <span class="caret"></span></a>
+                        <ul class="dropdown-menu animated fadeInDown" style="z-index: 99999;">
                             <li class="profile-img">
                                 <img src="../../img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
                             </li>
@@ -63,21 +63,22 @@
                 </ul>
                 <div id="userList" style="width: 100%;height: 100%;">
                     <div style="width: 100%;height: 100%; margin: 10px 28%">
-                        <form class="form-inline">
-                            <div class="form-group">
-                                <label for="name">姓名</label>
-                                <input type="text" class="form-control name" id="name" placeholder="Jane Doe">
+                        <form class="form-inline" style="margin-left: 7px; width: 50%;height: 100%; float: left;"><!--float: left;让后面一个-->
+                            <div class="form-group" style="width: 200px">
+                                <select class="form-control input-lg" name="selectNameType" data-style="btn-info" style="width:69px;">
+                                    <option value ="name" >姓名</option>
+                                    <option value ="staffId" >理财师</option>
+                                </select>
+                                <input type="text" class="form-control" id="selectName" placeholder="姓名" style="width: 60%;margin-left: 2%">
                             </div>
-                            <div class="form-group">
-                                <label for="userCard">身份证</label>
-                                <input type="text" class="form-control userCard" id="userCard" placeholder="jane.doe@example.com">
+                            <div class="form-group" style="width: 200px">
+                                身份证<input type="email" class="form-control" id="userCard" style="width:60%; margin-left: 2%">
                             </div>
-                            <div class="form-group">
-                                <label for="staffName">理财师姓名</label>
-                                <input type="text" class="form-control staffName" id="staffName" placeholder="jane.doe@example.com">
-                            </div>
-                            <button type="submit" class="btn btn-default search">查询</button>
+                            <button type="submit" class="btn btn-default">查询</button>
                         </form>
+                        <button type="button" class="btn btn-default btn-sm btn-info"style="margin: 8px 16px">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true">增加</span>
+                        </button>
                     </div>
                     <table class="table table-hover table-condensed">
                         <!-- On rows -->
@@ -306,9 +307,9 @@
 
 <script>
     var pageIndex=1;
-    var name = $(".name").val();
+    var selectNameType = $("selectNameType").val();
+    var selectName = $(".selectName").val();
     var userCard = $(".userCard").val();
-    var staffName = $(".staffName").val();
     var user_Vue=new Vue({
         el:"#userList",
         data:{
@@ -324,7 +325,7 @@
                     var _this=this;
                     $.ajax({
                         url:"../../user/queryUserList.action",
-                        data : "name ="+ name+"&userCard ="+userCard+"&staffName ="+staffName+"&page ="+pageIndex,
+                        data : "selectName ="+ selectName+"&userCard ="+userCard+"&selectNameType ="+selectNameType+"&page ="+pageIndex,
                         dataType:"JSON",
                         type:"post",
                         success:function (data) {
@@ -346,12 +347,12 @@
             var staffName = $(".staffName").val();
             $.ajax({
                 url: "../queryList.action",
-                data: "name =" + name + "&userCard =" + userCard + "&staffName =" + staffName + "&page =" + pageIndex,
+                data: "selectName =" + selectName + "&userCard =" + userCard + "&selectNameType =" + selectNameType + "&page =" + pageIndex,
                 dataType: "JSON",
                 type: "post",
                 success: function (data) {
-                    _this.data.user_List = data.rowList;
-                    _this.data.maxPage = data.maxPage;
+                    _this._data.user_List = data.rowsList;
+                    _this._data.maxPage = data.total;
                 }
             })
         })

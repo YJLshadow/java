@@ -14,6 +14,8 @@ public interface IStaffDao {
     public int queryMax(String staffName,String staffCard, int education);
     //修改前根据id查询
     public Tb_StaffEntity queryById(Integer staffId);
+    //查询
+    public List<Tb_StaffEntity> queryByName(String staffName);
     //增
     public boolean addStaff(Object object);
     //删

@@ -29,6 +29,11 @@ public class StaffService implements IStaffService {
         return iStaffDao.queryById(staffId);
     }
 
+
+    public List<Tb_StaffEntity> queryByName(String staffName) {
+        return iStaffDao.queryByName(staffName);
+    }
+
     public boolean addStaff(Object object) {
         boolean f=false;
         iStaffDao.addStaff(object);

@@ -7,7 +7,7 @@
     <select id="queryListForUser" resultType="com.entity.Tb_UserEntity">
         select * from tb_user
     </select>
-    <select id="queryListBySql" resultType="com.entity.Tb_UserEntity" >
+    <select id="queryListByUserName" resultType="com.entity.Tb_UserEntity" >
         select * from tb_user
         <where>
             <if test="arg0!=null and arg0!=''">
@@ -16,12 +16,57 @@
             <if test="arg1!=null and arg1!=''">
                 and userCard like '%${arg1}%'
             </if>
-            <if test="arg2!=null and arg2!=''">
-                and staffName like '%${arg2}%'
+        </where>
+        limit #{arg2},#{arg43};
+    </select>
+
+   <!-- <select id="queryListByStaffId" resultType="com.entity.Tb_UserEntity" parameterType="integer">
+        select * from tb_user
+        <where>
+            <if test="arg0!=0">
+                staffId like '%${arg0!}%'
+            </if>
+            <if test="arg1!=null and arg1!=''">
+                and userCard like '%${arg1}%'
             </if>
         </where>
-        limit #{arg3},#{arg4};
+        limit #{arg2},#{arg3};
+    </select>-->
+
+
+    <resultMap id="queryListByStaffNameMap" type="Tb_UserEntity">
+            <id property="userId" column="userId"></id>
+            <result property="tel" column="tel"></result>
+            <result property="password" column="password"></result>
+            <result property="name" column="name"></result>
+            <result property="gender" column="gender"></result>
+            <result property="birth" column="birth"></result>
+            <result property="userCard" column="userCard"></result>
+            <result property="address" column="address"></result>
+            <result property="head" column="head"></result>
+            <result property="email" column="email"></result>
+            <result property="assets" column="assets"></result>
+            <result property="staffId" column="staffId"></result>
+
+        <collection column="staffId" ofType="com.entity.Tb_StaffEntity" property="tb_staff">
+            <id column="staffId" javaType="integer" jdbcType="int" property="staffId"></id>
+            <result column="staffName" javaType="String" jdbcType="VARCHAR" property="staffName"></result>
+            <result column="gender" javaType="integer" jdbcType="int" property="gender"></result>
+            <result column="staffCard" javaType="String" jdbcType="VARCHAR" property="staffCard"></result>
+            <result column="staffAddress" javaType="String" jdbcType="VARCHAR" property="staffAddress"></result>
+            <result column="education" javaType="integer" jdbcType="int" property="education"></result>
+            <result column="loginPassword" javaType="String" jdbcType="VARCHAR" property="loginPassword"></result>
+            <result column="staffRemark" javaType="String" jdbcType="VARCHAR" property="staffRemark"></result>
+            <result column="headerImage" javaType="String" jdbcType="VARCHAR" property="headerImage"></result>
+        </collection>
+    </resultMap>
+    <select id="queryListByStaffName" resultMap="queryListByStaffNameMap" parameterType="String">
+        select u.*,s.staffName from tb_user u where u.staffId in
+        (SELECT s.staffId from tb_staff s WHERE staffName like '%arg0%')
+        and userCard like '%${arg1}%' limit #{arg2},#{arg3};
     </select>
+
+
     <select id="queryById" resultType="com.entity.Tb_UserEntity" parameterType="integer">
         select * from tb_user
         <where>
@@ -30,7 +75,7 @@
             </if>
         </where>
     </select>
-    <select id="queryMax" resultType="integer" parameterType="String">
+    <select id="queryMaxByUserName" resultType="integer" parameterType="String">
         select count(*) from tb_user
         <where>
             <if test="arg0!=null and arg0!=''">
@@ -39,11 +84,15 @@
             <if test="arg1!=null and arg1!=''">
                 and userCard like '%${arg1}%'
             </if>
-            <if test="arg2!=null and arg2!=''">
-                and staffName like '%${arg2}%'
-            </if>
         </where>
     </select>
+
+    <select id="queryMaxByStaffName" resultType="integer" parameterType="integer">
+        select count(*) from tb_user u where u.staffId in
+        (SELECT s.staffId from tb_staff s WHERE staffName like '%arg0%')
+        and userCard like '%${arg1}%';
+    </select>
+
     <insert id="addUser" parameterType="com.entity.Tb_UserEntity">
         INSERT INTO tb_user(tel,password,name,gender,birth,userCard,address,head,email,assets,staffId) VALUES(#{tel},#{password},#{name},#{gender},#{birth},#{userCard},#{address},#{head},#{email},#{assets},#{staffId});
     </insert>
