@@ -2,6 +2,7 @@ package com.controller;
 
 import com.entity.Tb_BankEntity;
 import com.service.IBankService;
+import org.jcp.xml.dsig.internal.MacOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,22 +25,16 @@ public class BankController {
 
     @ResponseBody
     @RequestMapping(value = "selectWhere")
-    public Map<String,Object> selectWhere(HttpServletRequest request){
-        System.out.println("11111111111111111111111111");
+    public Map<String,Object> selectWhere(HttpServletRequest request) throws UnsupportedEncodingException {
         Map<String, Object> map = null ;
-        try {
-            request.setCharacterEncoding("utf-8");
-            String bankName = request.getParameter("bankName");
-            String index = request.getParameter("index");
-            List<Tb_BankEntity> bankEntityList= iBankService.selectWhere(index, (bankName==null?"":bankName));
-            map = new HashMap<String, Object>();
-            int maxPage=iBankService.getMax(bankName);
-            map.put("totals", maxPage);
-            map.put("rowsList",bankEntityList);
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
-        System.out.println("11111111111111111111111111");
+        request.setCharacterEncoding("utf-8");
+        String bankName = request.getParameter("bankName");
+        String index = request.getParameter("index");
+        List<Tb_BankEntity> bankEntityList= iBankService.selectWhere(index, bankName);
+        map = new HashMap<String, Object>();
+        int maxPage=iBankService.getMax(bankName);
+        map.put("totals", maxPage);
+        map.put("rowsList",bankEntityList);
         return map;
     }
 

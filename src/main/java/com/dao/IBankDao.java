@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.entity.Tb_BankEntity;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface IBankDao {
 
     public List<Tb_BankEntity> getall();
 
-    public List<Tb_BankEntity> selectWhere(Integer start,Integer end,String bankName);
+    public List<Tb_BankEntity> queryList(String bankName,Integer start,Integer end);
 
 
     public Tb_BankEntity getbyid(Integer bankId);
@@ -28,7 +29,8 @@ public interface IBankDao {
     public void deleteTb_Bank(Integer bankdId);
 
 
-    public int getMax(String bankName);
+    public int getMax(@Param("arg3") String arg3);
+
 
 
 

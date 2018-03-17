@@ -4,14 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.dao.IBankDao">
-    <select id="selectWhere" resultType="com.entity.Tb_BankEntity" parameterType="String">
+    <select id="queryList" resultType="com.entity.Tb_BankEntity">
         select * from tb_bank
         <where>
-            <if test="bankName!=null and bankName!=''">
-                bankName like '%${bankName}%'
+            <if test="arg0!=null and arg0!=''">
+                bankName like '%${arg0}%'
             </if>
         </where>
-        limit #{start},#{end};
+        limit #{arg1},#{arg2};
     </select>
 
     <insert id="addTb_Bank" parameterType="com.entity.Tb_BankEntity">
@@ -30,13 +30,12 @@
         delete from tb_bank where bankId=#{bankId}
     </delete>
 
-    <select id="getMax" resultType="int" parameterType="String">
+    <select id="getMax" resultType="int" parameterType="com.entity.Tb_BankEntity" >
+        select count(*) from tb_bank where bankName like '%${arg3}%'
+    </select>
+
+    <select id="getMaxs" resultType="int" >
         select count(*) from tb_bank
-        <where>
-            <if test="bankName!=null and bankName!=''">
-                bankName like '%${bankName}%'
-            </if>
-        </where>
     </select>
 
 </mapper>

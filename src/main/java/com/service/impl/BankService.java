@@ -25,11 +25,11 @@ public class BankService implements IBankService{
 
     public List<Tb_BankEntity> selectWhere(String index, String bankName) {
         int end=8;
-        int start=1;
+        int start=0;
         if(index!=null){
             start =(Integer.parseInt(index)-1) * end;
         }
-        List<Tb_BankEntity> bankEntities=iBankDao.selectWhere(start,end,bankName);
+        List<Tb_BankEntity> bankEntities=iBankDao.queryList(bankName,start,end);
         return bankEntities;
     }
 
@@ -48,10 +48,13 @@ public class BankService implements IBankService{
 
     public int getMax(String bankName) {
         int end=8;
-        int maxPage=iBankDao.getMax(bankName)/end;
-        if(iBankDao.getMax(bankName)%end!=0){
+        int max=iBankDao.getMax(bankName);
+        int maxPage=max/end;
+        if(max%end!=0){
             maxPage=maxPage+1;
         }
         return maxPage;
     }
+
+
 }
