@@ -136,20 +136,20 @@
                                 <td class="active" style="text-align: center;width: 600px">{{bank.bankRemark}}</td>
                                 <td class="active" style="text-align: center;width: 200px">
                                     <button type="button" class="btn btn-danger btn-xs">删除</button>
-                                    <button type="button" class="btn btn-warning btn-xs">修改</button></td>
+                                    <button type="button" class="btn btn-warning btn-xs" >修改</button></td>
                             </tr>
                             <tr>
                                 <td colspan="5">
                                     <div class="_page" style="float:right;">
-                                        <div class="go" onclick="currentIndex==1?'':go('back')" :class="{disabled_:currentIndex==1}">上一页</div>
+                                        <div class="go" v-on:click="currentIndex==1?'':go('back')" :class="{disabled_:currentIndex==1}">上一页</div>
                                         <div class="ps">
-                                            <span class="pi" onclick="go(1)" v-if="currentIndex>2">1</span>
+                                            <span class="pi" v-on:click="go(1)" v-if="currentIndex>2">1</span>
                                             {{currentIndex>2?'...':''}}
-                                            <span class="pi" :class="{selected:i==currentIndex}" onclick="go(i)" v-for="i in maxPage" v-if="i>=currentIndex&&i<currentIndex+4">{{i}}</span>
+                                            <span class="pi" :class="{selected:i==currentIndex}" v-on:click="go(i)" v-for="i in maxPage" v-if="i>=currentIndex&&i<currentIndex+4">{{i}}</span>
                                             {{currentIndex<(maxPage-3)?'...':''}}
-                                            <span class="pi" onclick="go(maxPage)" v-if="currentIndex<(maxPage-3)">{{maxPage}}</span>
+                                            <span class="pi" v-on:clickonclick="go(maxPage)" v-if="currentIndex<(maxPage-3)">{{maxPage}}</span>
                                         </div>
-                                        <div class="go" onclick="currentIndex==maxPage?'':go('next')" :class="{disabled_:currentIndex==maxPage}">下一页</div>
+                                        <div class="go" v-on:click="currentIndex==maxPage?'':go('next')" :class="{disabled_:currentIndex==maxPage}">下一页</div>
                                     </div>
                                 </td>
                             </tr>
@@ -362,12 +362,14 @@
             getall : function(){
                 var _this = this;
                 searchValue=$("#exampleInputName2").val();
+                pageIndex=this.currentIndex;
                 $.get("../../bank/selectWhere.action",{"bankName":searchValue,"index":pageIndex},function(data){
                     _this._data.bank_List = data.rowsList;
                     _this._data.maxPage = data.totals;
                 });
             },
             go:function(_page){
+                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 if(_page == "back"){
                     this.currentIndex = this.currentIndex - (this.currentIndex > 1 ? 1 : 0);
                 }else if(_page == "next"){
@@ -375,9 +377,11 @@
                 }else{
                     this.currentIndex = _page;
                 }
-                Console.log(currentIndex);
+                console.log(this.currentIndex);
                 this.getall();
-            }
+            },
+
+
 //            save : function(){
 //                var _this = this;
 //                $.ajax({
@@ -473,62 +477,6 @@
           });
         })
     })
-
-    //    $(document).ready(function(){
-    //        $(".page").click(function(){
-    //            var maxPage = nuser_Vue._data.maxPage;
-    //            var selectPage = $(this).text();
-    //            if(selectPage == "首页"){
-    //                pageIndex = 1;
-    //                $("#lastPage").removeClass("button-selected");
-    //                $("#firstPage").addClass("button-selected");
-    //            }
-    //            else if(selectPage == "上一页"){
-    //                if(pageIndex>1){
-    //                    pageIndex = pageIndex -1;
-    //                }
-    //                if(pageIndex==1){
-    //                    $("#lastPage").removeClass("button-selected");
-    //                    $("#firstPage").addClass("button-selected");
-    //                }
-    //            }
-    //            else if(selectPage == "下一页"){
-    //                if(pageIndex<maxPage){
-    //                    pageIndex = pageIndex + 1;
-    //                }
-    //                if(pageIndex==maxPage){
-    //                    $("#firstPage").removeClass("button-selected");
-    //                    $("#lastPage").addClass("button-selected");
-    //                }
-    //            }
-    //            else if(selectPage == "末页"){
-    //                if(pageIndex!=maxPage){
-    //                    pageIndex = maxPage;
-    //                    $("#firstPage").removeClass("button-selected");
-    //                    $("#lastPage").addClass("button-selected");
-    //                }
-    //            }
-    //            var searchValue = $(".searchValue").val();
-    //            $.ajax({
-    //                url : "/selectWhere.action",
-    //                dataType : "JSON",
-    //                data : "index="+pageIndex+"&search="+searchValue,
-    //                success : function(data){
-    //                    nuser_Vue._data.nuser_List = data.rowsList;
-    //                    nuser_Vue._data.maxPage = data.totals;
-    //                    nuser_Vue._data.currentIndex = pageIndex;
-    //                }
-    //            });
-    //
-    //        })
-
-//            模糊查询
-//            $("#searchBank").click(function(){
-//
-//            })
-
-
-
 
 //        })
 
