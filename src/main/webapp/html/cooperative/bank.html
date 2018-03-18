@@ -108,16 +108,14 @@
                     </li>
                 </ul>
                 <div id="bankList">
-
-
                     <div style="width: 100%;height: 100%;">
                         <div style="width: 100%;height: 100%; margin: 10px 28%;">
                             <form class="form-inline">
                                 <div class="form-group">
                                     <input type="text" class="form-control searchName" id="exampleInputName2" placeholder="银行名称">
                                 </div>
-                                <button type="button" class="btn btn-default searchBankName" id="searchBankName">查询</button>
-                                <button type="button" class="btn btn-success" style="margin-left: 100px;">增加</button>
+                                <button type="button" class="btn btn-default searchBankName" id="searchBankName"  >查询</button>
+                                <button type="button" class="btn btn-success" style="margin-left: 100px;"  v-on:click="addBankEntity()">增加</button>
                             </form>
                         </div>
                         <table class="table table-hover table-condensed">
@@ -155,8 +153,53 @@
                             </tr>
                         </table>
                     </div>
-                </div>
+                    <!-- 模态弹出框 begin -->
+                    <div class="modal fade" id="bankModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">{{modalTitle}}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form name="reg_testdate">
+                                        <div class="form-group">
+                                            <label  class="control-label">银行名称:</label>
+                                            <input type="text" class="form-control" id="bankName" v-model="bankEntity.bankName">
+                                        </div>
+                                        <div class="form-group" name="date">
+                                            <label class="control-label">时间:</label>
+                                            <br/>
+                                            <select name="YYYY" v-on:change="YYYYDD(this.value)">
+                                                <option value="">请选择 年</option>
+                                            </select>
+                                            <select name="MM" v-on:change="MMDD(this.value)">
+                                                <option value="">选择 月</option>
+                                            </select>
+                                            <select name="DD" v-on:change="DDD(this.value)">
+                                                <option value="">选择 日</option>
+                                            </select>
+                                            <!--<input type="text" class="form-control" id="bankDate" v-model="bankEntity.bankDate">-->
+                                        </div>
 
+                                        <div class="form-group">
+                                            <label class="control-label">备注:</label>
+                                            <textarea type="text" class="form-control" id="bankRemark" v-model="bankEntity.bankRemark">
+                                            </textarea>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-success" v-on:click="save()">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 模态弹出框 end -->
+                    </div>
             </div>
         </nav>
         <div class="side-menu sidebar-inverse">
@@ -347,6 +390,7 @@
 <script>
     var pageIndex = 1;
     var searchValue="";
+    var changeDD = 1;//->一个全局变量
     var bank_Vue = new Vue({
         el : "#bankList",
         data : {
@@ -411,12 +455,16 @@
 //                });
 //            },
 
-//            addNuser : function(){
-//                this.saveUrl = "/add.action";
-//                this.modalTitle = "增加";
-//                this.nuser = {};
-//                this.modalShow();
-//            },
+            addBankEntity : function(){
+                this.saveUrl = "../../bank/addTb_Bank.action";
+                this.modalTitle = "增加";
+                this.bankEntity = {};
+                this.modalShow();
+                if (document.attachEvent)
+                    window.attachEvent("onload", this.YYYYMMDDstart());
+                else
+                    window.addEventListener('load', this.YYYYMMDDstart(), false);
+            },
 
 //            updateNuser : function(id){
 //                this.saveUrl = "/update.action";
@@ -445,9 +493,9 @@
 //                });
 //            },
             //模态框隐藏
-//            modalHide : function(){
-//                $("#nuserModal").modal("hide");
-//            },
+            modalHide : function(){
+                $("#bankModal").modal("hide");
+            },
             //删除模态框隐藏
 //            deleteModalHide : function(){
 //                $("#deleteNuserModal").modal("hide");
@@ -457,15 +505,78 @@
 //                $("#deleteNuserModal").modal("show");
 //            },
             //模态框显示
-//            modalShow : function(){
-//                $("#nuserModal").modal("show");
-//            },
+            modalShow : function(){
+                $("#bankModal").modal("show");
+            },
+            YYYYMMDDstart : function(){
+                MonHead = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                //先给年下拉框赋内容
+                var y = new Date().getFullYear();
+                for (var i = (y - 47); i < (y + 21); i++) //以今年为准，前30年，后30年
+                    document.reg_testdate.YYYY.options.add(new Option(" " + i + " 年", i));
+                //赋月份的下拉框
+                for (var i = 1; i < 13; i++)
+                    document.reg_testdate.MM.options.add(new Option(" " + i + " 月", i));
+                document.reg_testdate.YYYY.value = y;
+                document.reg_testdate.MM.value = new Date().getMonth() + 1;
+                var n = MonHead[new Date().getMonth()];
+                if (new Date().getMonth() == 1 && IsPinYear(YYYYvalue)) n++;
+                writeDay(n); //赋日期下拉框
+            },
+            YYYYDD : function(str) //年发生变化时日期发生变化(主要是判断闰平年)
+            {
+                var MMvalue = document.reg_testdate.MM.options[document.reg_testdate.date.MM.selectedIndex].value;
+                if (MMvalue == "") {
+//            var e = document.reg_testdate.DD;
+                    optionsClear(e);
+                    return;
+                }
+                var n = MonHead[MMvalue - 1];
+                if (MMvalue == 2 && IsPinYear(str)) n++;
+                writeDay(n)
+            },
+            MMDD : function(str) //月发生变化时日期联动
+            {
+                var YYYYvalue = document.reg_testdate.YYYY.options[document.reg_testdate.YYYY.selectedIndex].value;
+                if (YYYYvalue == "") {
+                    var e = document.reg_testdate.DD;
+                    optionsClear(e);
+                    return;
+                }
+                var n = MonHead[str - 1];
+                if (str == 2 && IsPinYear(YYYYvalue)) n++;
+                writeDay(n)
+            },
+            writeDay : function(n) //据条件写日期的下拉框
+            {
+                var e = document.reg_testdate.DD;
+                optionsClear(e);
+                for (var i = 1; i < (n + 1); i++)
+                {
+                    e.options.add(new Option(" " + i + " 日", i));
+                    if(i == changeDD){
+                        e.options[i].selected = true;  //->保持选中状态
+                    }
+                }
+                console.log(i);
+                console.log(changeDD);
+            },
+            IsPinYear : function(year) //判断是否闰平年
+            {
+                return (0 == year % 4 && (year % 100 != 0 || year % 400 == 0));
+            },
+            optionsClear : function(e) {
+                e.options.length = 1;
+            },
+            DDD : function(str){
+                changeDD = str;
+            },
         },
-
         created : function(){
             this.getall();
         }
     })
+
 
 
     $(document).ready(function() {
@@ -478,7 +589,13 @@
         })
     })
 
-//        })
+
+
+
+    //        })
+
+</script>
+<script>
 
 </script>
 </html>
