@@ -17,18 +17,27 @@ public class UserService implements IUserService {
         return iUserDao.queryListForUser();
     }
 
-    //带条件查询所有
-    public List<Tb_UserEntity> queryListBySql(String name,String userCard,String staffName, int begin, int end) {
-        return iUserDao.queryListBySql(name,userCard,staffName,begin,end);
+    //默认根据客户名字模糊查询
+    public List<Tb_UserEntity> queryListByUserName(String selectName,String userCard, int begin, int end) {
+        return iUserDao.queryListByUserName(selectName,userCard,begin,end);
+    }
+//    根据理财师id模糊查询
+    public List<Tb_UserEntity> queryListByStaffName(String selectStaffName,String userCard,int begin, int end){
+        return iUserDao.queryListByStaffName(selectStaffName,userCard,begin,end);
     }
 
-    //查询最大行
-    public int queryMax(String name,String userCard,String staffName) {
-        return iUserDao.queryMax(name,userCard,staffName);
+    //根据用户姓名查询最大行
+    public int queryMaxByUserName(String selectName,String userCard) {
+        return iUserDao.queryMaxByUserName(selectName,userCard);
     }
 
-    //修改前根据id查询
-    public Tb_UserEntity queryById(Integer userId) {
+    //根据理财师id查询最大行
+    public int queryMaxByStaffName(String selectStaffName,String userCard) {
+        return iUserDao.queryMaxByStaffName(selectStaffName,userCard);
+    }
+
+    //修改前根据userid查询
+    public Tb_UserEntity queryByUserId(Integer userId) {
         return iUserDao.queryById(userId);
     }
 

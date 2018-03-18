@@ -1,7 +1,9 @@
 package com.controller;
 
+import com.entity.Tb_StaffEntity;
 import com.entity.Tb_UserEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.service.impl.StaffService;
 import com.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,8 @@ import java.util.Map;
 public class UserController {
     @Autowired
     UserService userService;
+    @Autowired
+    StaffService staffService;
 
     @ResponseBody
     @RequestMapping(value = "queryUserList")
@@ -24,34 +28,74 @@ public class UserController {
         Map<String,Object> map=null;
         try {
             request.setCharacterEncoding("utf-8");//设置编码
-            String userName = request.getParameter("name");//搜索里面的值
+            String selectNameType=request.getParameter("selectNameType");
+            String selectName = request.getParameter("selectName");//搜索里面的值
             String userCard = request.getParameter("userCard");//搜索里面的值
-            String staffName = request.getParameter("staffName");//搜索里面的值
             String page = request.getParameter("page");//得到那边传过来的值
-            if(userName!=null && userName!="" && userCard!=null && userCard!="" && staffName!=null && staffName!=""){
-//                searchValue = new String(searchValue.getBytes("iso-8859-1"), "utf-8");
-                System.out.println(userName+""+userCard+""+staffName+":修改前");
-
-            }
+            System.out.println(selectNameType+selectName+userCard+page);
             int end = 5;
             int begin = 1;
-//            if(page!=null){
-//                begin =(Integer.parseInt(page)-1) * end;
-//            }
-            List<Tb_UserEntity> tb_userEntities=userService.queryListBySql("","","",begin,end);
+            if(selectName!=null && selectName!="" && userCard!=null && userCard!=""&&selectNameType!=null&&selectNameType!=""){
+//              searchValue = new String(searchValue.getBytes("iso-8859-1"), "utf-8");
+//                选中的下拉框的值为staffId
+                if(selectNameType=="staffId"){
+//                    得到所有根据staff名字模糊查询出来的对象
+//                    List<Tb_StaffEntity> staffEntities=staffService.queryByName(selectName);
+//                    for (Tb_StaffEntity tb_staffEntity:staffEntities){
+//                        得到所有根据staff名字模糊查询出来的id
+//                        Integer staffId=tb_staffEntity.getStaffId();
+//                        根据staffId查询和userId模糊查询
+                        List<Tb_UserEntity> tb_userEntities=userService.queryListByStaffName(selectName,userCard,begin,end);
+                        map = new HashMap<String, Object>();
+                        int maxPage=userService.queryMaxByStaffName(selectName,userCard)/end;
+                        if (userService.queryMaxByStaffName(selectName,userCard)%end!=0){
+                            maxPage=maxPage+1;
+                            System.out.println(maxPage+"选中的是staffName"+tb_userEntities);
+                        }
+                        map.put("total",maxPage);
+                        map.put("rowsList",tb_userEntities);
+                    }
+//                    如果选中的是用户名字
+                List<Tb_UserEntity> tb_userEntities=userService.queryListByUserName(selectName,userCard,begin,end);
                 map = new HashMap<String, Object>();
-                int maxPage=userService.queryMax("","","")/end;
-            if (userService.queryMax("","","")%end!=0){
-                maxPage=maxPage+1;
-                System.out.println(maxPage+"sss"+tb_userEntities);
-            }
-            map.put("total",maxPage);
-            map.put("rowsList",tb_userEntities);
+                int maxPage=userService.queryMaxByUserName(selectName,userCard)/end;
+                if (userService.queryMaxByUserName(selectName,userCard)%end!=0){
+                    maxPage=maxPage+1;
+                    System.out.println(maxPage+"选中的是user的name"+tb_userEntities);
+                }
+                map.put("total",maxPage);
+                map.put("rowsList",tb_userEntities);
+                }
+//                选中的下拉框值为name
+                List<Tb_UserEntity> tb_userEntities=userService.queryListByUserName(selectName,userCard,begin,end);
+                map = new HashMap<String, Object>();
+                int maxPage=userService.queryMaxByUserName(selectName,userCard)/end;
+                if (userService.queryMaxByUserName(selectName,userCard)%end!=0){
+                    maxPage=maxPage+1;
+                    System.out.println(maxPage+"选中的是user的name"+tb_userEntities);
+                }
+                map.put("total",maxPage);
+                map.put("rowsList",tb_userEntities);
         }catch (Exception e){
             e.printStackTrace();
         }
         return map;
     }
+
+//                System.out.println(selectName+""+userCard+""+selectNameType+":修改前");
+//            }
+//            int end = 5;
+//            int begin = 1;
+//            List<Tb_UserEntity> tb_userEntities=userService.queryListByUserName("","",begin,end);
+//                map = new HashMap<String, Object>();
+//                int maxPage=userService.queryMaxByUserName("","")/end;
+//            if (userService.queryMaxByUserName("","")%end!=0){
+//                maxPage=maxPage+1;
+//                System.out.println(maxPage+"sss"+tb_userEntities);
+//            }
+//            map.put("total",maxPage);
+//            map.put("rowsList",tb_userEntities);
+
 
     //  查询单个的方法
     @ResponseBody
@@ -59,7 +103,7 @@ public class UserController {
     public Tb_UserEntity queryStudentById(HttpServletRequest request) throws Exception{
         request.setCharacterEncoding("utf-8");
         String id = request.getParameter("id");
-        Tb_UserEntity stuEntit = userService.queryById(Integer.parseInt(id));
+        Tb_UserEntity stuEntit = userService.queryByUserId(Integer.parseInt(id));
         return stuEntit;
     }
 
@@ -98,7 +142,7 @@ public class UserController {
     public String deleteStudent(HttpServletRequest request) throws Exception{
         request.setCharacterEncoding("utf-8");
         String id = request.getParameter("id");
-        Tb_UserEntity stuEntity = userService.queryById(Integer.parseInt(id));
+        Tb_UserEntity stuEntity = userService.queryByUserId(Integer.parseInt(id));
         String result = "";
         boolean f = userService.deleteUser(stuEntity);
         if(f){
