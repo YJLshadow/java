@@ -52,7 +52,7 @@ public class UserService implements IUserService {
 //    删
     public boolean deleteUser(Object object) {
         boolean f=false;
-        iUserDao.deleteUser(object);
+//        iUserDao.deleteUser(object);
             f=true;
         return f;
     }

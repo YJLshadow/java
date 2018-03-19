@@ -134,7 +134,7 @@
                                 <td class="active" style="text-align: center;width: 600px">{{bank.bankRemark}}</td>
                                 <td class="active" style="text-align: center;width: 200px">
                                     <button type="button" class="btn btn-danger btn-xs" v-on:click="deleteBankId(selectedId=bank.bankId)">删除</button>
-                                    <button type="button" class="btn btn-warning btn-xs" >修改</button></td>
+                                    <button type="button" class="btn btn-warning btn-xs" v-on:click="updateBankEntity(bank.bankId)" >修改</button></td>
                             </tr>
                             <tr>
                                 <td colspan="5">
@@ -431,6 +431,17 @@
                 this.modalTitle = "增加";
                 this.bankEntity = {};
                 this.modalShow();
+            },
+            get : function(id){
+                var _this = this;
+                $.ajax({
+                    url : "../../bank/getById.action",
+                    data : {bankId : id},
+                    dataType : "JSON",
+                    success : function(data){
+                        _this.bankEntity = data;
+                    }
+                });
             },
             updateBankEntity : function(id){
                 this.saveUrl = "../../bank/updateTb_Bank.action";

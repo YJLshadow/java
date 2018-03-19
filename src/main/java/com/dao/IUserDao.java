@@ -22,7 +22,7 @@ public interface IUserDao {
     public boolean addUser(Object object);
     //删
     //public boolean delete(Object object, Object a);//当有2个参数时必须写@param或则在xml那边#{XXX}必须用param1 param2来代替
-    public boolean deleteUser(Object object);//只有一个的话就不用管
+    public boolean deleteUser(int userId);//只有一个的话就不用管
     //改
     public boolean updateUser(Object object);
 
