@@ -78,6 +78,7 @@ public class UserController {
                 map.put("rowsList",tb_userEntities);
         }catch (Exception e){
             e.printStackTrace();
+
         }
         return map;
     }
