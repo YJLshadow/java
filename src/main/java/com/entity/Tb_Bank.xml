@@ -34,8 +34,6 @@
         select count(*) from tb_bank where bankName like '%${arg3}%'
     </select>
 
-    <select id="getMaxs" resultType="int" >
-        select count(*) from tb_bank
-    </select>
+
 
 </mapper>

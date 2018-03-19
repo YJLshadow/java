@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +61,7 @@ public class BankController {
             e.printStackTrace();
         }
         Tb_BankEntity bankEntity = JSON.parseObject(request.getParameter("bankEntity"),Tb_BankEntity.class);
+        bankEntity.setBankDate(new Date());
         String message = "";
         try {
             iBankService.addTb_Bank(bankEntity);
