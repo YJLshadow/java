@@ -432,6 +432,12 @@
                 this.bankEntity = {};
                 this.modalShow();
             },
+            updateBankEntity : function(id){
+                this.saveUrl = "../../bank/updateTb_Bank.action";
+                this.modalTitle = "修改";
+                this.get(id);
+                this.modalShow();
+            },
             save : function(){
                 var _this = this;
                 $.ajax({
@@ -441,7 +447,6 @@
                     success : function(data){
                         if(data){
                             _this.modalHide();
-                            alert(data);
                             _this._data.currentIndex=1;
                             _this.getall();
                         }
@@ -460,7 +465,6 @@
                     success : function(data){
                         if(data){
                             _this.deleteModalHide();
-                            alert(data);
                             _this._data.currentIndex=1;
                             _this.getall();
 

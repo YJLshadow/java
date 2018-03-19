@@ -77,13 +77,14 @@ public class BankController {
 
     @ResponseBody
     @RequestMapping(value = "deleteTb_Bank")
-    public String deleteTb_Bank(HttpServletRequest request){
+    public String deleteTb_Bank(HttpServletRequest request, HttpServletResponse response){
         try {
             request.setCharacterEncoding("utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         String id = request.getParameter("bankId");
+        response.setCharacterEncoding("utf-8");
         String message = "";
         try {
             iBankService.deleteTb_Bank(id);
@@ -96,13 +97,15 @@ public class BankController {
 
     @ResponseBody
     @RequestMapping(value = "updateTb_Bank")
-    public String updateTb_Bank(HttpServletRequest request){
+    public String updateTb_Bank(HttpServletRequest request, HttpServletResponse response){
         try {
             request.setCharacterEncoding("utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         Tb_BankEntity bankEntity = JSON.parseObject(request.getParameter("bankEntity"),Tb_BankEntity.class);
+        response.setCharacterEncoding("utf-8");
+
         String message = "";
         try {
             iBankService.updateTb_Bank(bankEntity);
