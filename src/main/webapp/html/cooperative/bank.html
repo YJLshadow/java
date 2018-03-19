@@ -18,7 +18,6 @@
     <link rel="stylesheet" type="text/css" href="../../lib/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="../../lib/css/dataTables.bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../lib/css/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="../../css/page.css">
     <!-- CSS App -->
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
     <link rel="stylesheet" type="text/css" href="../../css/themes/flat-blue.css">
@@ -108,14 +107,15 @@
                     </li>
                 </ul>
                 <div id="bankList">
+
+
                     <div style="width: 100%;height: 100%;">
-                        <div style="width: 100%;height: 100%; margin: 10px 28%;">
+                        <div style="width: 100%;height: 100%; margin: 10px 28%">
                             <form class="form-inline">
                                 <div class="form-group">
-                                    <input type="text" class="form-control searchName" id="exampleInputName2" placeholder="银行名称">
+                                    <input type="text" class="form-control" id="exampleInputName2" placeholder="银行名称">
                                 </div>
-                                <button type="button" class="btn btn-default searchBankName" id="searchBankName"  >查询</button>
-                                <button type="button" class="btn btn-success" style="margin-left: 100px;"  v-on:click="addBankEntity()">增加</button>
+                                <button type="submit" class="btn btn-default">查询</button>
                             </form>
                         </div>
                         <table class="table table-hover table-condensed">
@@ -130,76 +130,33 @@
                             <tr v-for="bank in bank_List">
                                 <td class="active" style="text-align: center;width: 50px">{{bank.bankId}}</td>
                                 <td class="active" style="text-align: center;width: 200px">{{bank.bankName}}</td>
-                                <td class="active" style="text-align: center;width: 150px">{{new Date(bank.bankDate).toLocaleDateString()}}</td>
+                                <td class="active" style="text-align: center;width: 150px">{{bank.bankDate}}</td>
                                 <td class="active" style="text-align: center;width: 600px">{{bank.bankRemark}}</td>
                                 <td class="active" style="text-align: center;width: 200px">
+                                    <button type="button" class="btn btn-success btn-xs">增加</button>
                                     <button type="button" class="btn btn-danger btn-xs">删除</button>
-                                    <button type="button" class="btn btn-warning btn-xs" >修改</button></td>
-                            </tr>
-                            <tr>
-                                <td colspan="5">
-                                    <div class="_page" style="float:right;">
-                                        <div class="go" v-on:click="currentIndex==1?'':go('back')" :class="{disabled_:currentIndex==1}">上一页</div>
-                                        <div class="ps">
-                                            <span class="pi" v-on:click="go(1)" v-if="currentIndex>2">1</span>
-                                            {{currentIndex>2?'...':''}}
-                                            <span class="pi" :class="{selected:i==currentIndex}" v-on:click="go(i)" v-for="i in maxPage" v-if="i>=currentIndex&&i<currentIndex+4">{{i}}</span>
-                                            {{currentIndex<(maxPage-3)?'...':''}}
-                                            <span class="pi" v-on:clickonclick="go(maxPage)" v-if="currentIndex<(maxPage-3)">{{maxPage}}</span>
-                                        </div>
-                                        <div class="go" v-on:click="currentIndex==maxPage?'':go('next')" :class="{disabled_:currentIndex==maxPage}">下一页</div>
-                                    </div>
-                                </td>
+                                    <button type="button" class="btn btn-warning btn-xs">修改</button></td>
                             </tr>
                         </table>
                     </div>
-                    <!-- 模态弹出框 begin -->
-                    <div class="modal fade" id="bankModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">{{modalTitle}}</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form name="reg_testdate">
-                                        <div class="form-group">
-                                            <label  class="control-label">银行名称:</label>
-                                            <input type="text" class="form-control" id="bankName" v-model="bankEntity.bankName">
-                                        </div>
-                                        <div class="form-group" name="date">
-                                            <label class="control-label">时间:</label>
-                                            <br/>
-                                            <select name="YYYY" v-on:change="YYYYDD(this.value)">
-                                                <option value="">请选择 年</option>
-                                            </select>
-                                            <select name="MM" v-on:change="MMDD(this.value)">
-                                                <option value="">选择 月</option>
-                                            </select>
-                                            <select name="DD" v-on:change="DDD(this.value)">
-                                                <option value="">选择 日</option>
-                                            </select>
-                                            <!--<input type="text" class="form-control" id="bankDate" v-model="bankEntity.bankDate">-->
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label">备注:</label>
-                                            <textarea type="text" class="form-control" id="bankRemark" v-model="bankEntity.bankRemark">
-                                            </textarea>
-                                        </div>
-                                    </form>
+                    <nav aria-label="Page navigation" style="margin-left: 38%">
+                        <ul class="pagination">
+                            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li>
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
 
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
-                                    <button type="button" class="btn btn-success" v-on:click="save()">保存</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 模态弹出框 end -->
-                    </div>
             </div>
         </nav>
         <div class="side-menu sidebar-inverse">
@@ -359,38 +316,33 @@
             </nav>
         </div>
         <!-- Main Content -->
+        <script type="text/javascript" src="../../lib/js/jquery.min.js"></script>
+        <script type="text/javascript" src="../../lib/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../lib/js/Chart.min.js"></script>
+        <script type="text/javascript" src="../../lib/js/bootstrap-switch.min.js"></script>
 
+        <script type="text/javascript" src="../../lib/js/jquery.matchHeight-min.js"></script>
+        <script type="text/javascript" src="../../lib/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="../../lib/js/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../lib/js/select2.full.min.js"></script>
+        <script type="text/javascript" src="../../lib/js/ace/ace.js"></script>
+        <script type="text/javascript" src="../../lib/js/ace/ace.js"></script>
+        <script type="text/javascript" src="../../lib/js/ace/mode-html.js"></script>
+        <script type="text/javascript" src="../../lib/js/ace/theme-github.js"></script>
+        <!-- Javascript -->
+        <script type="text/javascript" src="../../js/app.js"></script>
+        <script type="text/javascript" src="../../js/alert.js"></script>
+        <!-- VUE.js-->
+        <script type="text/javascript" src="../../js/vue/vue.js"></script>
 
     </div>
 </div>
-
-<div id="code-preview-alert">
-
-</div>
-
-<script type="text/javascript" src="../../lib/js/jquery.min.js"></script>
-<script type="text/javascript" src="../../lib/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../lib/js/Chart.min.js"></script>
-<script type="text/javascript" src="../../lib/js/bootstrap-switch.min.js"></script>
-
-<script type="text/javascript" src="../../lib/js/jquery.matchHeight-min.js"></script>
-<script type="text/javascript" src="../../lib/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../../lib/js/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="../../lib/js/select2.full.min.js"></script>
-<script type="text/javascript" src="../../lib/js/ace/ace.js"></script>
-<script type="text/javascript" src="../../lib/js/ace/ace.js"></script>
-<script type="text/javascript" src="../../lib/js/ace/mode-html.js"></script>
-<script type="text/javascript" src="../../lib/js/ace/theme-github.js"></script>
-<!-- Javascript -->
-<script type="text/javascript" src="../../js/app.js"></script>
-<script type="text/javascript" src="../../js/alert.js"></script>
-<!-- VUE.js-->
-<script type="text/javascript" src="../../js/vue/vue.js"></script>
 </body>
 <script>
+
+
     var pageIndex = 1;
     var searchValue="";
-    var changeDD = 1;//->一个全局变量
     var bank_Vue = new Vue({
         el : "#bankList",
         data : {
@@ -405,27 +357,17 @@
         methods:{
             getall : function(){
                 var _this = this;
-                searchValue=$("#exampleInputName2").val();
-                pageIndex=this.currentIndex;
-                $.get("../../bank/selectWhere.action",{"bankName":searchValue,"index":pageIndex},function(data){
-                    _this._data.bank_List = data.rowsList;
-                    _this._data.maxPage = data.totals;
-                });
+                $.ajax({
+                    url : "../../bank/selectWhere.action",
+                    date: "bankName="+searchValue+"&index="+pageIndex,
+                    dataType : "JSON",
+                    type : "get",
+                    success : function(data){
+                        _this._data.bank_List = data.rowsList;
+                        _this._data.maxPage = data.totals;
+                    }
+                })
             },
-            go:function(_page){
-                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-                if(_page == "back"){
-                    this.currentIndex = this.currentIndex - (this.currentIndex > 1 ? 1 : 0);
-                }else if(_page == "next"){
-                    this.currentIndex = this.currentIndex + (this.currentIndex < this.maxPage ? 1 : 0);
-                }else{
-                    this.currentIndex = _page;
-                }
-                console.log(this.currentIndex);
-                this.getall();
-            },
-
-
 //            save : function(){
 //                var _this = this;
 //                $.ajax({
@@ -455,16 +397,12 @@
 //                });
 //            },
 
-            addBankEntity : function(){
-                this.saveUrl = "../../bank/addTb_Bank.action";
-                this.modalTitle = "增加";
-                this.bankEntity = {};
-                this.modalShow();
-                if (document.attachEvent)
-                    window.attachEvent("onload", this.YYYYMMDDstart());
-                else
-                    window.addEventListener('load', this.YYYYMMDDstart(), false);
-            },
+//            addNuser : function(){
+//                this.saveUrl = "/add.action";
+//                this.modalTitle = "增加";
+//                this.nuser = {};
+//                this.modalShow();
+//            },
 
 //            updateNuser : function(id){
 //                this.saveUrl = "/update.action";
@@ -493,9 +431,9 @@
 //                });
 //            },
             //模态框隐藏
-            modalHide : function(){
-                $("#bankModal").modal("hide");
-            },
+//            modalHide : function(){
+//                $("#nuserModal").modal("hide");
+//            },
             //删除模态框隐藏
 //            deleteModalHide : function(){
 //                $("#deleteNuserModal").modal("hide");
@@ -505,97 +443,80 @@
 //                $("#deleteNuserModal").modal("show");
 //            },
             //模态框显示
-            modalShow : function(){
-                $("#bankModal").modal("show");
-            },
-            YYYYMMDDstart : function(){
-                MonHead = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-                //先给年下拉框赋内容
-                var y = new Date().getFullYear();
-                for (var i = (y - 47); i < (y + 21); i++) //以今年为准，前30年，后30年
-                    document.reg_testdate.YYYY.options.add(new Option(" " + i + " 年", i));
-                //赋月份的下拉框
-                for (var i = 1; i < 13; i++)
-                    document.reg_testdate.MM.options.add(new Option(" " + i + " 月", i));
-                document.reg_testdate.YYYY.value = y;
-                document.reg_testdate.MM.value = new Date().getMonth() + 1;
-                var n = MonHead[new Date().getMonth()];
-                if (new Date().getMonth() == 1 && IsPinYear(YYYYvalue)) n++;
-                writeDay(n); //赋日期下拉框
-            },
-            YYYYDD : function(str) //年发生变化时日期发生变化(主要是判断闰平年)
-            {
-                var MMvalue = document.reg_testdate.MM.options[document.reg_testdate.date.MM.selectedIndex].value;
-                if (MMvalue == "") {
-//            var e = document.reg_testdate.DD;
-                    optionsClear(e);
-                    return;
-                }
-                var n = MonHead[MMvalue - 1];
-                if (MMvalue == 2 && IsPinYear(str)) n++;
-                writeDay(n)
-            },
-            MMDD : function(str) //月发生变化时日期联动
-            {
-                var YYYYvalue = document.reg_testdate.YYYY.options[document.reg_testdate.YYYY.selectedIndex].value;
-                if (YYYYvalue == "") {
-                    var e = document.reg_testdate.DD;
-                    optionsClear(e);
-                    return;
-                }
-                var n = MonHead[str - 1];
-                if (str == 2 && IsPinYear(YYYYvalue)) n++;
-                writeDay(n)
-            },
-            writeDay : function(n) //据条件写日期的下拉框
-            {
-                var e = document.reg_testdate.DD;
-                optionsClear(e);
-                for (var i = 1; i < (n + 1); i++)
-                {
-                    e.options.add(new Option(" " + i + " 日", i));
-                    if(i == changeDD){
-                        e.options[i].selected = true;  //->保持选中状态
-                    }
-                }
-                console.log(i);
-                console.log(changeDD);
-            },
-            IsPinYear : function(year) //判断是否闰平年
-            {
-                return (0 == year % 4 && (year % 100 != 0 || year % 400 == 0));
-            },
-            optionsClear : function(e) {
-                e.options.length = 1;
-            },
-            DDD : function(str){
-                changeDD = str;
-            },
+//            modalShow : function(){
+//                $("#nuserModal").modal("show");
+//            },
         },
+
         created : function(){
             this.getall();
         }
     })
 
-
-
-    $(document).ready(function() {
-        $(".searchBankName").click(function () { // 模糊查询
-            searchValue = $("#exampleInputName2").val();
-          $.post("../../bank/selectWhere.action",{"bankName":searchValue,"index":pageIndex},function (data) {
-              bank_Vue._data.bank_List = data.rowsList;
-              bank_Vue._data.maxPage = data.totals;
-          });
-        })
-    })
-
-
-
-
+    //    $(document).ready(function(){
+    //        $(".page").click(function(){
+    //            var maxPage = nuser_Vue._data.maxPage;
+    //            var selectPage = $(this).text();
+    //            if(selectPage == "首页"){
+    //                pageIndex = 1;
+    //                $("#lastPage").removeClass("button-selected");
+    //                $("#firstPage").addClass("button-selected");
+    //            }
+    //            else if(selectPage == "上一页"){
+    //                if(pageIndex>1){
+    //                    pageIndex = pageIndex -1;
+    //                }
+    //                if(pageIndex==1){
+    //                    $("#lastPage").removeClass("button-selected");
+    //                    $("#firstPage").addClass("button-selected");
+    //                }
+    //            }
+    //            else if(selectPage == "下一页"){
+    //                if(pageIndex<maxPage){
+    //                    pageIndex = pageIndex + 1;
+    //                }
+    //                if(pageIndex==maxPage){
+    //                    $("#firstPage").removeClass("button-selected");
+    //                    $("#lastPage").addClass("button-selected");
+    //                }
+    //            }
+    //            else if(selectPage == "末页"){
+    //                if(pageIndex!=maxPage){
+    //                    pageIndex = maxPage;
+    //                    $("#firstPage").removeClass("button-selected");
+    //                    $("#lastPage").addClass("button-selected");
+    //                }
+    //            }
+    //            var searchValue = $(".searchValue").val();
+    //            $.ajax({
+    //                url : "/selectWhere.action",
+    //                dataType : "JSON",
+    //                data : "index="+pageIndex+"&search="+searchValue,
+    //                success : function(data){
+    //                    nuser_Vue._data.nuser_List = data.rowsList;
+    //                    nuser_Vue._data.maxPage = data.totals;
+    //                    nuser_Vue._data.currentIndex = pageIndex;
+    //                }
+    //            });
+    //
     //        })
 
-</script>
-<script>
+    //        模糊查询
+    //        $("#searchNuser").click(function(){
+    //            var searchValue = $(".searchValue").val();
+    //            $.ajax({
+    //                url: "/selectWhere.action",
+    //                dataType: "JSON",
+    //                data : "search="+ searchValue+"&index="+1,
+    //                success: function(data) {
+    //                    nuser_Vue._data.nuser_List = data.rowsList;
+    //                    nuser_Vue._data.maxPage = data.totals;
+    //                    nuser_Vue._data.currentIndex = 1;
+    //                }
+    //            });
+    //        })
+    //
+    //    })
 
 </script>
 </html>

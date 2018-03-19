@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+@RequestMapping(value = "product")
 @Controller
 public class ProductController {
     @Autowired
@@ -20,8 +21,11 @@ public class ProductController {
     @RequestMapping("queryList")
     public Map<String,Object> queryList(HttpServletRequest request) throws Exception{
         request.setCharacterEncoding("utf-8");//设置编码
+        String searchA = request.getParameter("searchA");//下拉框
+        String searchB = request.getParameter("searchB");//下拉框
 
-        String searchValue = request.getParameter("search");//搜索里面的值
+        String searchValueA = request.getParameter("searchValueA");//搜索里面的值
+        String searchValueB = request.getParameter("searchValueB");//搜索里面的值
         String page = request.getParameter("page");//得到那边传过来的值
         String sql = "";
         int end = 5;
@@ -29,8 +33,8 @@ public class ProductController {
         if(page!=null){
             begin =(Integer.parseInt(page)-1) * end;
         }
-        if(searchValue!=null && searchValue!=""){
-            sql = " where productName like '%"+searchValue+"%'";
+        if((searchA!="" && searchValueA!=null && searchValueA!="")||( searchB!="" &&searchValueB!=null && searchValueB!="")){
+            sql = " where "+searchA+" like '%"+searchValueA+"%' and "+searchB+ " like '%"+searchValueB+"'%";
         }
         Map<String,Object> map = productService.queryMap(sql,begin,end);
         return map;
@@ -61,7 +65,6 @@ public class ProductController {
         }
         return result;
     }
-
 
     //    修改学生的方法
     @ResponseBody
