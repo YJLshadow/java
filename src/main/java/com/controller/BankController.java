@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
@@ -54,7 +55,7 @@ public class BankController {
 
     @ResponseBody
     @RequestMapping(value = "addTb_Bank")
-    public String addTb_Bank(HttpServletRequest request){
+    public String addTb_Bank(HttpServletRequest request, HttpServletResponse response){
         try {
             request.setCharacterEncoding("utf-8");
         } catch (UnsupportedEncodingException e) {
@@ -62,6 +63,7 @@ public class BankController {
         }
         Tb_BankEntity bankEntity = JSON.parseObject(request.getParameter("bankEntity"),Tb_BankEntity.class);
         bankEntity.setBankDate(new Date());
+        response.setCharacterEncoding("utf-8");
         String message = "";
         try {
             iBankService.addTb_Bank(bankEntity);
@@ -82,14 +84,14 @@ public class BankController {
             e.printStackTrace();
         }
         String id = request.getParameter("bankId");
-        String result = "";
+        String message = "";
         try {
             iBankService.deleteTb_Bank(id);
-            result = "删除成功！";
+            message = "删除成功！";
         }catch (Exception e){
-            result = "删除失败！";
+            message = "删除失败！";
         }
-        return result;
+        return message;
     }
 
     @ResponseBody

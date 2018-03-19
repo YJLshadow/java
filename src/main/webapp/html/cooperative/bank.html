@@ -441,8 +441,9 @@
                     success : function(data){
                         if(data){
                             _this.modalHide();
-                            _this.getall();
+                            alert(data);
                             _this._data.currentIndex=1;
+                            _this.getall();
                         }
                     }
                 });
@@ -454,15 +455,15 @@
                 var _this = this;
                 $.ajax({
                     url : "../../bank/deleteTb_Bank.action",
-                    dataType : "JSON",
                     data : "bankId="+id,
                     type : "post",
                     success : function(data){
                         if(data){
-                            console.log("lslldksdkdsksdkkdkskskks"+data);
                             _this.deleteModalHide();
-                            _this.getall();
+                            alert(data);
                             _this._data.currentIndex=1;
+                            _this.getall();
+
                         }
                     }
                 });
